@@ -4,10 +4,13 @@
  */
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * PsProfessionalInfo
  */
-class PsProfessionalInfo {
+class PsProfessionalInfo extends Model {
 
     /** @var string $professionCode */
     private $professionCode;
@@ -29,5 +32,13 @@ class PsProfessionalInfo {
 
     /** @var string $professionalTitleCode */
     private $professionalTitleCode;
+
+    /**
+     * Get the Ps that owns the comment.
+     */
+    public function ps(): BelongsTo
+    {
+        return $this->belongsTo(Ps::class);
+    }
 
 }

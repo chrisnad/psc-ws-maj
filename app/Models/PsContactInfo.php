@@ -4,15 +4,17 @@
  */
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * PsContactInfo
  */
-class PsContactInfo {
+class PsContactInfo extends Model {
 
-    /** @var string $mail */
-    private $mail;
+    /** @var string $email */
+    private $email;
 
-    /** @var string $mobile */
-    private $mobile;
+    /** @var string $phone */
+    private $phone;
 
 }

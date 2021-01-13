@@ -6,11 +6,13 @@ use App\Models\Ps;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class PsController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -55,35 +57,54 @@ class PsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $id
+     * @param Ps $ps
      * @return Application|Factory|View
      */
-    public function show($id)
+    public function show(Ps $ps)
     {
-        return view('ps/show', ['id' => $id]);
+        return view('ps.show', ['ps' => $ps]);
+    }
+
+    /**
+     * Display the specified resource.
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function getById(Request $request): RedirectResponse
+    {
+        $id = $request->input('id');
+        // TODO: GET THE ps THE RIGHT WAY
+        $ps = Ps::findOrFail($id);
+
+        return redirect()->route('ps.show', $ps);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $id
-     * @return Response
+     * @param $ps
+     * @return Application|Factory|View
      */
-    public function edit($id): Response
+    public function edit(Ps $ps)
     {
-        //
+        // TODO: GET THE ps THE RIGHT WAY
+        //$ps = Ps::findOrFail($ps);
+
+        return view('ps.edit', ['ps' => $ps]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param $id
-     * @return Response
+     * @param Ps $ps
+     * @return Application|Factory|View
      */
-    public function update(Request $request, $id): Response
+    public function update(Ps $ps)
     {
-        dd($request, $id, $request->request->get('telephone'));
+        // TODO: this updates in our database, adapt for WS
+        $ps->update($this->validatePs());
+
+        return view('ps.show', ['ps' => $ps]);
     }
 
     /**
@@ -95,5 +116,18 @@ class PsController extends Controller
     public function destroy(Ps $ps): Response
     {
         //
+    }
+
+    /**
+     * Validate Ps.
+     *
+     * @return array
+     */
+    protected function validatePs(): array
+    {
+        return request()->validate([
+            'email' => 'required',
+            'phone' => 'required'
+        ]);
     }
 }
