@@ -4,30 +4,23 @@
  */
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 /**
  * Ps
  */
-class Ps {
+class Ps extends Model {
 
-    /** @var string $nationalId */
-    private $nationalId;
+    protected $primaryKey = 'nationalId';
 
-    /** @var string $mail */
-    private $mail;
-
-    /** @var string $mobile */
-    private $mobile;
-
-    /** @var string $employeeType */
-    private $employeeType;
-
-    /** @var string $name */
-    private $name;
-
-    /** @var string $lastName */
-    private $lastName;
-
-    /** @var PsProfessionalInfo[] $userProfessions */
-    private $userProfessions;
+    protected $fillable = ['email', 'phone'];
+    /**
+     * Get the professions for this Ps.
+     */
+    public function professions(): HasMany
+    {
+        return $this->hasMany(PsProfessionalInfo::class);
+    }
 
 }

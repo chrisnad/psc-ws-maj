@@ -20,7 +20,18 @@
                                 {{ __("Welcome, please consider log in") }}
                         @endif
 
-                        <a class="nav-link" href={{ route('ps.show', 6) }}>{{ __('>> Page de parrainage') }}</a>
+                        {{ Form::open(['route' => 'ps.getById', 'method' => 'GET']) }}
+
+                        <div class="form-group"><!-- IdNat is required -->
+                            {{ Form::label('id', 'Identifiant :', ['class' => 'control-label']) }}
+                            {{ Form::text('id', '', array('id'=>'id', 'class'=>'form-control', 'required')) }}
+                        </div>
+
+                        <div class="col text-center">
+                            {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
+                        </div>
+                        {{ Form::close() }}
+
 
                     </div>
                 </div>

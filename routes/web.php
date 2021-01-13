@@ -17,26 +17,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['id']);
 });
 
 //Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
-
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
 
-Route::get('/ps/{nationalId}', [PsController::class, 'show'])
+Route::get('/ps', [PsController::class, 'getById'])
+    ->name('ps.getById');
+Route::get('/ps/{ps}', [PsController::class, 'show'])
     ->name('ps.show');
-Route::put('/ps/{nationalId}', [PsController::class, 'update'])
+Route::put('/ps/{ps}', [PsController::class, 'update'])
     ->name('ps.update');
-Route::get('/ps/{nationalId}/edit', [PsController::class, 'edit']);
+Route::get('/ps/{ps}/edit', [PsController::class, 'edit'])
+    ->name('ps.edit');
 
 
 Route::get('/auth/{provider}/redirect', [LoginController::class, 'redirectToProvider'])
     ->name('auth.redirect');
-
 Route::get('/auth/{provider}/callback', [LoginController::class, 'handleProviderCallback']);

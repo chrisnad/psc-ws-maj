@@ -14,27 +14,9 @@
                             </div>
                         @endif
 
-                        {{ Form::open(['route' => ['ps.update', $id], 'method' => 'PUT']) }}
+                        {{ $ps }}
 
-                            <div class="form-group"><!-- IdNat is required -->
-                                {{ Form::label('identifiant', 'Identifiant :', ['class' => 'control-label']) }}
-                                {{ Form::text('identifiant', '', array('id'=>'ps-id', 'class'=>'form-control', 'required')) }}
-                            </div>
-
-                            <div class="form-group"><!-- Phone is required -->
-                                {{ Form::label('telephone', 'Telephone :', array('class' => 'control-label')) }}
-                                {{ Form::text('telephone', '', array('id'=>'username-id', 'class'=>'form-control', 'required')) }}
-                            </div>
-
-                            <div class="form-group"><!-- Email is required -->
-                                {{ Form::label('email', 'E-Mail Address :', array('class' => 'control-label')) }}
-                                {{ Form::text('email', '', array('id'=>'email-id', 'class'=>'form-control', 'required')) }}
-                            </div>
-
-                            <div class="col text-center">
-                                {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
-                            </div>
-                        {{ Form::close() }}
+                        <a class="nav-link" href={{ route('ps.edit', $ps) }}>{{ __('Parrainer ce professionel') }}</a>
 
                     </div>
                 </div>
