@@ -1,5 +1,7 @@
 FROM php:8.0.1-apache-buster
 
+ARG version=0.0.3
+
 RUN apt-get update
 
 # 1. development packages
@@ -66,8 +68,8 @@ RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser
 RUN mkdir -p /home/devuser/.composer && \
     chown -R devuser:devuser /home/devuser
 
-RUN cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/v0.0.1.tar.gz && \
-    tar -xzf v0.0.1.tar.gz --strip 1 && rm v0.0.1.tar.gz
+RUN cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/v$version.tar.gz && \
+    tar -xzf v$version.tar.gz --strip 1 && rm v$version.tar.gz
 
 # Setup working directory
 WORKDIR /var/www/html
