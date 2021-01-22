@@ -1,6 +1,7 @@
 FROM php:8.0.1-apache-buster
 
-ARG version=0.0.3
+# app version, set with docker build --build-arg version=0.0.2
+ARG version=0.0.2
 
 RUN apt-get update
 
@@ -51,7 +52,6 @@ RUN a2enmod rewrite headers
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN docker-php-ext-install \
-    pdo \
     pdo_mysql \
     exif
 
