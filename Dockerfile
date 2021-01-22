@@ -79,7 +79,6 @@ RUN composer install --optimize-autoloader --no-dev
 RUN npm install
 
 RUN php artisan cache:clear
-RUN chgrp -R www-data storage bootstrap/cache && chmod -R ug+rwx storage bootstrap/cache
 RUN composer dump-autoload
 
 # Npm run

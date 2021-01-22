@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __("Page d'accueil") }}</div>
+                    @include('sub.card-header', array('title' => 'Recherche par identifiant'))
 
                     <div class="card-body">
                         @if (session('status'))
@@ -15,10 +15,17 @@
                         @endif
 
                         @if (Auth::user())
-                                {{ __("Hello ") }} {{Auth::user()->name}} :)
+                                <p>{{ __("Hello ") }} {{Auth::user()->name}}</p>
                         @else
-                                {{ __("Welcome, please consider log in") }}
+                                <p>{{ __("Welcome, please consider log in") }}</p>
                         @endif
+
+                        <hX>Vous trouverez l'identifiant national :</hX>
+                        <ul>
+                            <li>sur la première de la ligne de la CPS</li>
+                            <li>en ajoutant un 8 devant un numéro RPPS, par exemple : 812345678901</li>
+                            <li>en ajoutant un 0 devant un numéro ADELI, par exemple : 0123456789</li>
+                        </ul>
 
                         {{ Form::open(['route' => 'ps.getById', 'method' => 'GET']) }}
 

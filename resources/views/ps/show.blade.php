@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __("Page de parrainage") }}</div>
+                    @include('sub.card-header', array('title' => 'Page de parrainage'))
 
                     <div class="card-body">
                         @if (session('status'))
@@ -14,9 +14,14 @@
                             </div>
                         @endif
 
-                        {{ $ps }}
 
-                        <a class="nav-link" href={{ route('ps.edit', $ps) }}>{{ __('Parrainer ce professionel') }}</a>
+                        <p class="h3 center font-weight-bold">Nom : {{ $ps->name }} {{ $ps->lastName }}</p>
+                        <p class="h3 center font-weight-bold">Id national : {{ $ps->nationalId }}</p>
+
+                            <p class="p-2"></p>
+
+                        <a class="btn btn-default btn-outline-primary center" href="{{ route('ps.edit', $ps) }}">
+                            {{ __('Parrainer ce professionel') }}</a>
 
                     </div>
                 </div>
