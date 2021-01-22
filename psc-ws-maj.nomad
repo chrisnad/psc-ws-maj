@@ -38,8 +38,6 @@ job "psc-ws-maj" {
                     DB_HOST={{ range service "psc-ws-maj-db-server" }}{{ .Address }}{{ end }}
                     DB_PORT={{ range service "psc-ws-maj-db-server" }}{{ .Port }}{{ end }}
                     DB_DATABASE=pscwsmaj
-                    DB_USERNAME=root
-                    DB_PASSWORD=root
 
                     BROADCAST_DRIVER=log
                     CACHE_DRIVER=file
@@ -65,9 +63,6 @@ job "psc-ws-maj" {
                     MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
                     MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
-                    PROSANTECONNECT_CLIENT_ID=ans-parrainage-bas
-                    PROSANTECONNECT_CLIENT_SECRET=5e609e45-ee6c-4854-93a0-91a44aa953bb
-                    PROSANTECONNECT_REDIRECT_URI="${APP_URL}:9000/auth/prosanteconnect/callback"
                 EOH
                 destination = "secrets/.env"
                 change_mode = "restart"
