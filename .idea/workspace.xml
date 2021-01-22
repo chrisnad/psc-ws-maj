@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Ps.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Ps.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PsContactInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/PsContactInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PsProfessionalInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/PsProfessionalInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ps/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +145,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/ps" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../core-ui" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -180,7 +176,7 @@
       <updated>1610352360198</updated>
       <workItem from="1610352361263" duration="602000" />
       <workItem from="1610353434454" duration="35912000" />
-      <workItem from="1610465630105" duration="21740000" />
+      <workItem from="1610465630105" duration="76781000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
