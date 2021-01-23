@@ -72,6 +72,10 @@ class PsController extends Controller
      */
     public function getById(Request $request): RedirectResponse
     {
+        request()->validate([
+            'id' => 'required'
+        ]);
+
         $id = $request->input('id');
         // TODO: GET THE ps THE RIGHT WAY
         $ps = Ps::findOrFail($id);
@@ -126,8 +130,9 @@ class PsController extends Controller
     protected function validatePs(): array
     {
         return request()->validate([
-            'email' => 'required',
-            'phone' => 'required'
+            'email'      => 'required',
+            'phone'      => 'required',
+            'conditions' => 'accepted'
         ]);
     }
 }

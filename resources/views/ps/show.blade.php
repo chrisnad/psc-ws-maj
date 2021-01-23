@@ -15,8 +15,8 @@
                         @endif
 
 
-                        <p class="h3 center font-weight-bold">Nom : {{ $ps->name }} {{ $ps->lastName }}</p>
-                        <p class="h3 center font-weight-bold">Id national : {{ $ps->nationalId }}</p>
+                        <p class="h3 font-weight-bold">Nom : {{ $ps->name }} {{ $ps->lastName }}</p>
+                        <p class="h3 font-weight-bold">Id national : {{ $ps->nationalId }}</p>
 
                             <p class="p-2"></p>
 

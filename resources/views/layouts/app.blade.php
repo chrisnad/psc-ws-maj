@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -69,8 +70,8 @@
             </div>
         </nav>
 
-        <div class="py-4">
-            <img src="{{ asset('images/LOGO_ANS_2020_Ligne.png') }}" width="800" alt="ans logo" class="center">
+        <div class="py-4" style="align-items: center; justify-content: center; display: flex">
+            <img src="{{ asset('images/LOGO_ANS_2020_Ligne.png') }}" width="800" alt="ans logo">
         </div>
 
         <main class="py-4">

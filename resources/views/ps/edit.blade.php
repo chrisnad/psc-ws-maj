@@ -14,19 +14,27 @@
                             </div>
                         @endif
 
-                        <p class="h3 center font-weight-bold">Nom : {{ $ps->name }} {{ $ps->lastName }}</p>
-                        <p class="h3 center font-weight-bold">Id national : {{ $ps->nationalId }}</p>
+                        <p class="h3 font-weight-bold">Nom : {{ $ps->name }} {{ $ps->lastName }}</p>
+                        <p class="h3 font-weight-bold">Id national : {{ $ps->nationalId }}</p>
 
                         {{ Form::open(['route' => ['ps.update', $ps], 'method' => 'PUT']) }}
 
                             <div class="form-group"><!-- Phone is required -->
                                 {{ Form::label('phone', 'Telephone :', array('class' => 'control-label')) }}
-                                {{ Form::text('phone', $ps->phone, array('id'=>'username-id', 'class'=>'form-control', 'required')) }}
+                                {{ Form::text('phone', $ps->phone, array('id'=>'phone-id', 'class'=>'form-control', 'required')) }}
+                                <p class="text-danger">{{ $errors->first('phone') }}</p>
                             </div>
 
                             <div class="form-group"><!-- Email is required -->
                                 {{ Form::label('email', 'E-Mail Address :', array('class' => 'control-label')) }}
                                 {{ Form::text('email', $ps->email, array('id'=>'email-id', 'class'=>'form-control', 'required')) }}
+                                <p class="text-danger">{{ $errors->first('email') }}</p>
+                            </div>
+
+                            <div class="form-group"><!-- Accept conditions is required -->
+                                {{ Form::checkbox('conditions', 'required') }}
+                                {{ Form::label('conditions', "J'accept les conditions d'utilisation du service", array('class' => 'control-label')) }}
+                                <p class="text-danger">{{ $errors->first('conditions') }}</p>
                             </div>
 
                             <div class="col text-center">
