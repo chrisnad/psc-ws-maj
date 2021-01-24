@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-ld-8 col-sd-8">
             <div class="card">
                 @include('sub.card-header', array('title' => "Page d'authentification"))
 

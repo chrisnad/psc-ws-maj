@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 col-ld-8 col-sd-8">
                 <div class="card">
                     @include('sub.card-header', array('title' => 'Page de parrainage'))
 
@@ -31,9 +31,10 @@
                                 <p class="text-danger">{{ $errors->first('email') }}</p>
                             </div>
 
-                            <div class="form-group"><!-- Accept conditions is required -->
-                                {{ Form::checkbox('conditions', 'required') }}
-                                {{ Form::label('conditions', "J'accept les conditions d'utilisation du service", array('class' => 'control-label')) }}
+                            <div class="form-group p-1"><!-- Accept conditions is required -->
+                                {{ Form::checkbox('conditions') }}
+                                <a class="align-middle small" href="#conditions-modal">
+                                    {{ Form::label('conditions', "J'accept les conditions d'utilisation du service", array('class' => 'control-label')) }}</a>
                                 <p class="text-danger">{{ $errors->first('conditions') }}</p>
                             </div>
 
@@ -48,6 +49,14 @@
                             Votre parrainage expirera au bout de 24h, passé ce délai les données seront effacées</p>
 
                         <p class="p-1 font-italic">* Lors de l'activation de la e-CPS votre confrère recevra un mail puis un SMS</p>
+
+                        @component('sub.modal', ['name' => 'conditions-modal'])
+                            <h1>Conditions : </h1>
+
+                            <p>
+                                Lorem ipsum...
+                            </p>
+                        @endcomponent
 
                     </div>
                 </div>
