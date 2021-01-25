@@ -10,6 +10,13 @@
             <p>{{ __("Bonjour, authentifiez-vous pour avoir accès au service") }}</p>
         @endif
 
+        @isset($message)
+            @component('sub.modal-visible', ['name' => 'success-modal', 'path' => '/'])
+                <h1>Succès!</h1>
+                <p>{{ $message }}</p>
+            @endcomponent
+        @endif
+
         <h6>Vous trouverez l'identifiant national :</h6>
         <ul>
             <li>sur la première de la ligne de la CPS</li>
@@ -29,16 +36,6 @@
             {{ Form::submit('Recherche', array('class' => 'btn btn-default btn-outline-primary')) }}
         </div>
         {{ Form::close() }}
-
-        <a href="#info-modal">Info</a>
-
-        @component('sub.modal', ['name' => 'info-modal'])
-            <h1>Pick a Plan</h1>
-
-            <p>
-                Lorem ipsum...
-            </p>
-        @endcomponent
 
     @endcomponent
 

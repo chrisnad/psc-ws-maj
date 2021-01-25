@@ -38,12 +38,12 @@
         </div>
         {{ Form::close() }}
 
-        <p class="p-2 h5 font-italic">Ce service vous permet de parrainer un professionnel de santé pour
+        <p class="pt-4 h5 font-italic">Ce service vous permet de parrainer un professionnel de santé pour
             qu’il puisse activer sa e-CPS. En cliquant sur PARRAINER vous pourrez enregistrer l'adresse
             mail et le numéro de mobile de votre confrère, ils lui serviront à activer sa e-CPS.
             Votre parrainage expirera au bout de 24h, passé ce délai les données seront effacées</p>
 
-        <p class="p-1 font-italic">* Lors de l'activation de la e-CPS votre confrère recevra un mail puis un SMS</p>
+        <p class="pt-1 font-italic">* Lors de l'activation de la e-CPS votre confrère recevra un mail puis un SMS</p>
 
         @component('sub.modal', ['name' => 'conditions-modal'])
             <h1>Conditions : </h1>
