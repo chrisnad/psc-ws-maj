@@ -16,13 +16,13 @@
 
         <div class="form-group"><!-- Phone is required -->
             {{ Form::label('phone', 'Telephone :', array('class' => 'control-label')) }}
-            {{ Form::text('phone', $ps->phone, array('id'=>'phone-id', 'class'=>'form-control', 'required')) }}
+            {{ Form::text('phone', $hiddenPhone, array('id'=>'phone-id', 'class'=>'form-control', 'required')) }}
             <p class="text-danger">{{ $errors->first('phone') }}</p>
         </div>
 
         <div class="form-group"><!-- Email is required -->
             {{ Form::label('email', 'E-Mail Address :', array('class' => 'control-label')) }}
-            {{ Form::text('email', $ps->email, array('id'=>'email-id', 'class'=>'form-control', 'required')) }}
+            {{ Form::text('email', $hiddenEmail, array('id'=>'email-id', 'class'=>'form-control', 'required')) }}
             <p class="text-danger">{{ $errors->first('email') }}</p>
         </div>
 

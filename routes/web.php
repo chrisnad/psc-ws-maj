@@ -27,8 +27,8 @@ if(!empty($proxy_schema)) {
 }
 
 Route::get('/', function () {
-    return view('welcome', ['id']);
-});
+    return view('welcome');
+})->name('welcome');
 
 //Auth::routes();
 
