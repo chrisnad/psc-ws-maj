@@ -9,6 +9,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class PsController extends Controller
 {
@@ -108,7 +110,10 @@ class PsController extends Controller
         // TODO: this updates in our database, adapt for WS
         $ps->update($this->validatePs());
 
-        return view('ps.show', ['ps' => $ps]);
+        $message = "L'utilisateur ".Auth::user()->preferred_username." a modifié l'utilisateur ".$ps->nationalId;
+        Log::info($message);
+
+        return view('welcome', ['message' => $message]);
     }
 
     /**

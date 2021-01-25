@@ -1,23 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-ld-8 col-sd-8">
-            <div class="card">
-                @include('sub.card-header', array('title' => "Page d'authentification"))
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    @component('sub.card', ['title' => "Page d'authentification"])
+        {{ __('Vous êtes authentifié') }}
+    @endcomponent
 
-                    {{ __('Vous êtes authentifié') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
