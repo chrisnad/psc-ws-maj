@@ -44,7 +44,7 @@
                         @guest
                             @if (Auth::guest())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/auth/prosanteconnect/redirect">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="/auth/prosanteconnect/redirect">{{ __('Se connecter') }}</a>
                                 </li>
                             @endif
                         @else
@@ -57,7 +57,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Déconnection') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
