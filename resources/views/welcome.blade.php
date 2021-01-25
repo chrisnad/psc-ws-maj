@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 col-ld-8 col-sd-8">
                 <div class="card">
                     @include('sub.card-header', array('title' => 'Recherche par identifiant'))
 
@@ -32,6 +32,7 @@
                         <div class="form-group"><!-- IdNat is required -->
                             {{ Form::label('id', 'Identifiant :', ['class' => 'control-label']) }}
                             {{ Form::text('id', '', array('id'=>'id', 'class'=>'form-control', 'required')) }}
+                            <p class="text-danger">{{ $errors->first('id') }}</p>
                         </div>
 
                         <div class="col text-center">
@@ -39,6 +40,15 @@
                         </div>
                         {{ Form::close() }}
 
+                        <a href="#info-modal">Info</a>
+
+                        @component('sub.modal', ['name' => 'info-modal'])
+                            <h1>Pick a Plan</h1>
+
+                            <p>
+                                Lorem ipsum...
+                            </p>
+                        @endcomponent
 
                     </div>
                 </div>

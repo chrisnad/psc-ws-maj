@@ -13,18 +13,20 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Pro Sante Connect - Webservice de mise à jour
+                <a class="navbar-brand font-weight-bold" href="{{ url('/') }}">
+                    <span style="color:rgb(27,113,184);">Pro Santé </span>
+                    <span style="color:rgb(214,10,82);">Connect</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -69,8 +71,8 @@
             </div>
         </nav>
 
-        <div class="py-4">
-            <img src="{{ asset('images/LOGO_ANS_2020_Ligne.png') }}" width="800" alt="ans logo" class="center">
+        <div class="py-4 align-items-center justify-content-center" style="display: flex">
+            <img src="{{ asset('images/LOGO_ANS_2020_Ligne.png') }}" class="col-md-8 col-lg-8 col-sm-8" alt="ans logo">
         </div>
 
         <main class="py-4">
