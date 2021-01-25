@@ -19,6 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
+
+    <!-- favicon -->
+    <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}" type="image/x-icon"/>
 </head>
 <body>
     <div id="app">
