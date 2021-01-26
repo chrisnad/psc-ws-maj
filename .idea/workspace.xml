@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="moved favicon to public/images and called link from html &lt;head&gt;">
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="obfuscate email and phone number">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +176,7 @@
       <updated>1610352360198</updated>
       <workItem from="1610352361263" duration="602000" />
       <workItem from="1610353434454" duration="35912000" />
-      <workItem from="1610465630105" duration="134278000" />
+      <workItem from="1610465630105" duration="138864000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -276,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611584834123</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="obfuscate email and phone number">
+      <created>1611596464760</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1611596464760</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,6 +302,7 @@
     <MESSAGE value="views are now implemented with components for reusability + some UI changes" />
     <MESSAGE value="added ps edit log for traceability + popup on successful ps edit" />
     <MESSAGE value="moved favicon to public/images and called link from html &lt;head&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved favicon to public/images and called link from html &lt;head&gt;" />
+    <MESSAGE value="obfuscate email and phone number" />
+    <option name="LAST_COMMIT_MESSAGE" value="obfuscate email and phone number" />
   </component>
 </project>
