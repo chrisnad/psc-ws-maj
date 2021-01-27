@@ -82,5 +82,7 @@ RUN npm install
 RUN php artisan cache:clear
 RUN composer dump-autoload
 
+RUN php artisan migrate
+
 # Npm run
 RUN npm run production
