@@ -15,6 +15,7 @@ class Ps extends Model {
     protected $primaryKey = 'nationalId';
 
     protected $fillable = ['email', 'phone'];
+
     /**
      * Get the professions for this Ps.
      */
