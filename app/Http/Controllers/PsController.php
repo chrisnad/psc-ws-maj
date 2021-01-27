@@ -75,7 +75,7 @@ class PsController extends Controller
         // TODO: GET THE ps THE RIGHT WAY
         $ps = Ps::findOrFail($id);
 
-        return redirect()->route('ps.show', $ps);
+        return redirect()->route('ps.show', $ps['nationalId']);
     }
 
     /**
@@ -105,12 +105,20 @@ class PsController extends Controller
      * Update the specified resource in storage.
      *
      * @param Ps $ps
-     * @return Application|Factory|View
+     * @return array|Application|Factory|View
      */
     public function update(Ps $ps)
     {
+        request()->validate([
+            'conditions' => 'accepted'
+        ]);
+
+        if (! request()->input('phone') and ! request()->input('email')){
+            return view('welcome', ['message' => "Aucun changement n'a été éffectué"]);
+        }
+
         // TODO: this updates in our database, adapt for WS
-        $ps->update($this->validatePs());
+        $ps->update(array_filter(request()->all()));
 
         $message = "L'utilisateur ".Auth::user()->preferred_username." a modifié l'utilisateur ".$ps->nationalId;
         Log::info($message);
@@ -129,17 +137,4 @@ class PsController extends Controller
         //
     }
 
-    /**
-     * Validate Ps.
-     *
-     * @return array
-     */
-    protected function validatePs(): array
-    {
-        return request()->validate([
-            'email'      => 'required',
-            'phone'      => 'required',
-            'conditions' => 'accepted'
-        ]);
-    }
 }

@@ -27,9 +27,9 @@ class PsController extends ApiController
      */
     public function index()
     {
-        $psList = Ps::all()->toArray();
+        $psList = Ps::all();
         return $this->respond([
-            'data' => $this->psTransformer->transformCollection($psList)
+            'data' => $this->psTransformer->transformCollection($psList->all())
         ]);
     }
 
@@ -62,6 +62,7 @@ class PsController extends ApiController
      */
     public function show($id)
     {
+        // TODO: this updates in our database, adapt for WS
         $ps = Ps::find($id);
         if (!$ps){
             return $this->responseNotFound("Ce professionel n'exist pas.");
@@ -80,15 +81,15 @@ class PsController extends ApiController
      */
     public function update(Ps $ps)
     {
-        if (! request()->input('phone') or ! request()->input('email')){
-            return $this->setStatusCode(400)->respondWithError('Parameters failed validation for a Ps');
+        if (! request()->input('phone') and ! request()->input('email')){
+            return $this->setStatusCode(400)->respondWithError('Erreur au niveau des paramètres renseignés');
         }
 
         // TODO: this updates in our database, adapt for WS
-        $ps->update($this->validatePs());
+        $ps->update(array_filter(request()->all()));
 
         return $this->respond([
-            'message' => 'Ps updated.'
+            'message' => 'Mise à jour du Ps avec succès.'
         ]);
     }
 
@@ -103,16 +104,4 @@ class PsController extends ApiController
         //
     }
 
-    /**
-     * Validate Ps.
-     *
-     * @return array
-     */
-    protected function validatePs(): array
-    {
-        return request()->validate([
-            'email'      => 'required',
-            'phone'      => 'required'
-        ]);
-    }
 }
