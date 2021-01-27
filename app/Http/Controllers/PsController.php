@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ps;
+use App\Psc\Transformers\PsTransformer;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,13 +16,15 @@ use Illuminate\Support\Facades\Log;
 class PsController extends Controller
 {
 
+    protected $psTransformer;
+
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
+        $this->psTransformer = new PsTransformer();
         $this->middleware('auth');
     }
 
@@ -57,18 +60,8 @@ class PsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Search for the specified resource.
      *
-     * @param Ps $ps
-     * @return Application|Factory|View
-     */
-    public function show(Ps $ps)
-    {
-        return view('ps.show', ['ps' => $ps]);
-    }
-
-    /**
-     * Display the specified resource.
      * @param Request $request
      * @return RedirectResponse
      */
@@ -82,7 +75,18 @@ class PsController extends Controller
         // TODO: GET THE ps THE RIGHT WAY
         $ps = Ps::findOrFail($id);
 
-        return redirect()->route('ps.show', $ps);
+        return redirect()->route('ps.show', $ps['nationalId']);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param Ps $ps
+     * @return Application|Factory|View
+     */
+    public function show(Ps $ps)
+    {
+        return view('ps.show', ['ps' => $this->psTransformer->transform($ps)]);
     }
 
     /**
@@ -93,25 +97,28 @@ class PsController extends Controller
      */
     public function edit(Ps $ps)
     {
-        // TODO: GET THE ps THE RIGHT WAY
-        //$ps = Ps::findOrFail($ps);
-
         return view('ps.edit', [
-            'ps' => $ps,
-            'hiddenEmail' => $this->hideEmail($ps->email),
-            'hiddenPhone' => $this->hidePhone($ps->phone)]);
+            'ps' => $this->psTransformer->transform($ps)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Ps $ps
-     * @return Application|Factory|View
+     * @return array|Application|Factory|View
      */
     public function update(Ps $ps)
     {
+        request()->validate([
+            'conditions' => 'accepted'
+        ]);
+
+        if (! request()->input('phone') and ! request()->input('email')){
+            return view('welcome', ['message' => "Aucun changement n'a été éffectué"]);
+        }
+
         // TODO: this updates in our database, adapt for WS
-        $ps->update($this->validatePs());
+        $ps->update(array_filter(request()->all()));
 
         $message = "L'utilisateur ".Auth::user()->preferred_username." a modifié l'utilisateur ".$ps->nationalId;
         Log::info($message);
@@ -130,49 +137,4 @@ class PsController extends Controller
         //
     }
 
-    /**
-     * Validate Ps.
-     *
-     * @return array
-     */
-    protected function validatePs(): array
-    {
-        return request()->validate([
-            'email'      => 'required',
-            'phone'      => 'required',
-            'conditions' => 'accepted'
-        ]);
-    }
-
-    /**
-     * Obfuscate Email.
-     *
-     * @param $email
-     * @return string
-     */
-    protected function hideEmail($email): string
-    {
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            list($first, $last) = explode('@', $email);
-            $first = str_replace(substr($first, '3'), str_repeat('*', strlen($first)-3>0 ? strlen($first)-3 : 2), $first);
-            $last = explode('.', $last);
-            $last_domain = str_replace(substr($last['0'], '1'), str_repeat('*', strlen($last['0'])-1), $last['0']);
-            return $first.'@'.$last_domain.'.'.$last['1'];
-        }
-        return "***********";
-    }
-
-    /**
-     * Obfuscate phone number.
-     *
-     * @param $number
-     * @return string
-     */
-    protected function hidePhone($number): string
-    {
-        if($number[0]=='+'){
-            return substr($number, 0, 4) . str_repeat('*', strlen($number)-6>0 ? strlen($number)-6 : 2) . substr($number, -2);
-        }
-        return substr($number, 0, 2) . str_repeat('*', strlen($number)-4>0 ? strlen($number)-4 : 2) . substr($number, -2);
-    }
 }

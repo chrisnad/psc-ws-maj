@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+$proxy_url    = env('PROXY_URL');
+$proxy_schema = env('PROXY_SCHEMA');
+
+if(!empty($proxy_url)) {
+    url()->forceRootUrl($proxy_url);
+}
+if(!empty($proxy_schema)) {
+    url()->forceScheme($proxy_schema);
+}
+
+Route::get('/ps', [PsController::class, 'index']);
+Route::get('/ps/{ps}', [PsController::class, 'show']);
+Route::put('/ps/{ps}', [PsController::class, 'update']);

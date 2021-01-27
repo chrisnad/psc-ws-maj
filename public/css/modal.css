@@ -43,10 +43,12 @@
 .custom-modal {
     position: relative;
     width: 600px;
-    max-width: 80%;
+    max-width: 90%;
     background: white;
     border-radius: 8px;
     padding: 1em 2em;
+    max-height: 90%;
+    overflow:auto;
 }
 
 .custom-modal .close {

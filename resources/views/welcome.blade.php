@@ -28,7 +28,7 @@
 
         <div class="form-group"><!-- IdNat is required -->
             {{ Form::label('id', 'Identifiant :', ['class' => 'control-label']) }}
-            {{ Form::text('id', '', array('id'=>'id', 'class'=>'form-control', 'required')) }}
+            {{ Form::text('id', '', array('class'=>'form-control', 'required')) }}
             <p class="text-danger">{{ $errors->first('id') }}</p>
         </div>
 
