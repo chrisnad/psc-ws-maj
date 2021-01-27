@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="form validation changes + only update non empty fields in edit form">
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="perform db migrate after build">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
@@ -178,7 +178,7 @@
       <updated>1610352360198</updated>
       <workItem from="1610352361263" duration="602000" />
       <workItem from="1610353434454" duration="35912000" />
-      <workItem from="1610465630105" duration="173153000" />
+      <workItem from="1610465630105" duration="174165000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -299,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611765277393</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="perform db migrate after build">
+      <created>1611773408330</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1611773408330</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,6 +336,7 @@
     <MESSAGE value="configure htaccess to export server status to prometheus" />
     <MESSAGE value="- logging conf : switch to errorlog channel so we can collect app logs in stderr&#10;- coded layer of abstraction for the Ps that we send to client, we now send an array with protected values&#10;- added api routes and api Ps controller with basic routes (get getall and put)" />
     <MESSAGE value="form validation changes + only update non empty fields in edit form" />
-    <option name="LAST_COMMIT_MESSAGE" value="form validation changes + only update non empty fields in edit form" />
+    <MESSAGE value="perform db migrate after build" />
+    <option name="LAST_COMMIT_MESSAGE" value="perform db migrate after build" />
   </component>
 </project>
