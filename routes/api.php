@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ProfessionController;
 use App\Http\Controllers\Api\PsController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +25,20 @@ if(!empty($proxy_schema)) {
     url()->forceScheme($proxy_schema);
 }
 
-Route::get('/ps', [PsController::class, 'index']);
-Route::get('/ps/{ps}', [PsController::class, 'show']);
-Route::put('/ps/{ps}', [PsController::class, 'update']);
+Route::resource('ps', PsController::class,
+    ['only' => ['index', 'store', 'show', 'update', 'destroy']])
+    ->names(['index' => 'api.ps.index',
+        'store' => 'api.ps.store',
+        'show' => 'api.ps.show',
+        'update' => 'api.ps.update',
+        'destroy' => 'api.ps.destroy'
+]);
+
+//Route::resource('professions', ProfessionController::class,
+//    ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+Route::get('ps/{ps}/professions', [ProfessionController::class, 'index']);
+Route::post('ps/{ps}/professions', [ProfessionController::class, 'store']);
+Route::get('ps/{ps}/professions/{profession}', [ProfessionController::class, 'show']);
+Route::put('ps/{ps}/professions/{profession}', [ProfessionController::class, 'update']);
+Route::delete('ps/{ps}/professions/{profession}', [ProfessionController::class, 'destroy']);

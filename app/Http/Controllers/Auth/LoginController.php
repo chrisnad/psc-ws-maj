@@ -66,7 +66,7 @@ class LoginController extends Controller
         );
 
         // Login the user
-        Auth::login($user, true);
+        Auth::login($user, false);
 
         // Redirect to welcome page
         return redirect()->route('welcome');

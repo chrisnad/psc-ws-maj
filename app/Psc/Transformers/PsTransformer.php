@@ -20,7 +20,7 @@ class PsTransformer extends Transformer {
     public function transform($ps): array
     {
         return [
-            'name' => $ps['name'],
+            'firstName' => $ps['firstName'],
             'lastName' => $ps['lastName'],
             'nationalId' => $ps['nationalId'],
             'phone' => $this->hidePhone($ps['phone']),

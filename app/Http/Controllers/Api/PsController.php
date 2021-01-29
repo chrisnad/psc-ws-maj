@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Ps;
 use App\Psc\Transformers\PsTransformer;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 
 class PsController extends ApiController
 {
@@ -34,24 +34,24 @@ class PsController extends ApiController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create(): Response
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
      * @return mixed
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+//        if (! request()->input('phone') and ! request()->input('email')){
+//            return $this->setStatusCode(400)->respondWithError('Erreur au niveau des paramètres renseignés');
+//        }
+
+        $ps = request()->all();
+        $ps['nationalId'] = (string) Str::uuid();
+
+        Ps::create($ps);
+
+        return $this->respond([
+            'message' => 'Creation avec succès.'
+        ]);
     }
 
     /**
@@ -62,12 +62,11 @@ class PsController extends ApiController
      */
     public function show($id)
     {
-        // TODO: this updates in our database, adapt for WS
-        $ps = Ps::find($id);
-        if (!$ps){
+        try {
+            $ps = Ps::findOrFail($id);
+        } catch(ModelNotFoundException $e) {
             return $this->responseNotFound("Ce professionel n'exist pas.");
         }
-
         return $this->respond([
             'data' => $this->psTransformer->transform($ps)
         ]);
@@ -96,12 +95,20 @@ class PsController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param Ps $ps
-     * @return Response
+     * @param $id
+     * @return mixed
      */
-    public function destroy(Ps $ps): Response
+    public function destroy($id)
     {
-        //
+        try {
+            $ps = Ps::findOrFail($id);
+        } catch(ModelNotFoundException $e) {
+            return $this->responseNotFound("Ce professionel n'exist pas.");
+        }
+        $ps->delete();
+        return $this->respond([
+            'message' => 'Supression du Ps avec succès.'
+        ]);
     }
 
 }

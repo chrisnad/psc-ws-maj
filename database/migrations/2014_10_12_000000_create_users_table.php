@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Jenssegers\Mongodb\Schema\Blueprint;
 
 class CreateUsersTable extends Migration
 {
@@ -13,19 +13,18 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
+        Schema::create('users', function (Blueprint $collection) {
+            $collection->string('name');
+            $collection->string('email')->unique()->nullable();
+            $collection->timestamp('email_verified_at')->nullable();
+            $collection->string('password')->nullable();
+            $collection->rememberToken();
+            $collection->timestamps();
 
-            $table->string('last_name')->nullable();
-            $table->string('provider')->nullable();
-            $table->string('provider_id')->nullable();
-            $table->string('preferred_username')->nullable();
+            $collection->string('last_name')->nullable();
+            $collection->string('provider')->nullable();
+            $collection->string('provider_id')->nullable();
+            $collection->string('preferred_username')->unique()->nullable();
         });
     }
 

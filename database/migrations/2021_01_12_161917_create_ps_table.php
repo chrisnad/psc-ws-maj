@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Jenssegers\Mongodb\Schema\Blueprint;
 
 class CreatePsTable extends Migration
 {
@@ -13,14 +13,14 @@ class CreatePsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ps', function (Blueprint $table) {
-            $table->string('nationalId')->unique();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('employeeType')->nullable();
-            $table->string('name')->nullable();
-            $table->string('lastName')->nullable();
-            $table->timestamps();
+        Schema::create('ps', function (Blueprint $collection) {
+            $collection->string('nationalId')->unique();
+            $collection->string('email')->nullable();
+            $collection->string('phone')->nullable();
+            $collection->string('employeeType')->nullable();
+            $collection->string('firstName')->nullable();
+            $collection->string('lastName')->nullable();
+            $collection->timestamps();
         });
     }
 
