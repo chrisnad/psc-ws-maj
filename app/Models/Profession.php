@@ -17,7 +17,7 @@ class Profession extends Model {
 
     protected $connection = 'mongodb';
 
-    // protected $primaryKey = 'code';
+    protected $primaryKey = 'code';
 
     protected $fillable = [
         'code',

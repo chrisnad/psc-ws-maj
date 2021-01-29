@@ -30,7 +30,7 @@ class ProfessionController extends ApiController
     public function index($nationalId)
     {
         try {
-            $professions = Ps::findOrFail($nationalId)->professions();
+            $professions = Ps::findOrFail($nationalId)->professions;
         } catch(ModelNotFoundException $e) {
             return $this->responseNotFound("Ce professionel n'exist pas.");
         }
@@ -74,13 +74,19 @@ class ProfessionController extends ApiController
     {
         try {
             $professions = Ps::findOrFail($nationalId)->professions;
-            $profession = $professions->firstWhere('code', $code);
         } catch(ModelNotFoundException $e) {
+            return $this->responseNotFound("Ce Ps n'exist pas.");
+        }
+
+        $profession = $professions->firstWhere('code', $code);
+
+        if ($profession) {
+            return $this->respond([
+                'data' => $this->professionTransformer->transform($profession)
+            ]);
+        } else {
             return $this->responseNotFound("Cet exercice professionnel n'exist pas.");
         }
-        return $this->respond([
-            'data' => $this->professionTransformer->transform($profession)
-        ]);
     }
 
     /**
@@ -91,7 +97,23 @@ class ProfessionController extends ApiController
      */
     public function update($nationalId, $code)
     {
-        //
+
+        try {
+            $professions = Ps::findOrFail($nationalId)->professions;
+        } catch(ModelNotFoundException $e) {
+            return $this->responseNotFound("Ce Ps n'exist pas.");
+        }
+
+        $profession = $professions->firstWhere('code', $code);
+
+        if ($profession) {
+            $profession->update(request()->all(), ['upsert' => true]);
+            return $this->respond([
+                'message' => "Mise à jour de l'exercise pro avec succès."
+            ]);
+        } else {
+            return $this->responseNotFound("Cet exercice professionnel n'exist pas.");
+        }
     }
 
     /**

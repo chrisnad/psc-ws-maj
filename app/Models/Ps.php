@@ -19,7 +19,6 @@ class Ps extends Model {
     protected $fillable = [
         'idType',
         'id',
-        'nationalId',
         'lastName',
         'firstName',
         'dateOfBirth',

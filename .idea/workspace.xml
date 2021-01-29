@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="catch and redirect to welcome page with error message modal when id not found">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/psc-ws-maj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/psc-ws-maj.iml" afterDir="false" />
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ProfessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ProfessionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Profession.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Profession.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Ps.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Ps.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PsContactInfo.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/PsProfessionalInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Profession.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_19_000000_create_failed_jobs_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_12_161917_create_ps_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_12_161917_create_ps_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_13_085120_create_ps_professional_info_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +185,7 @@
       <workItem from="1610353434454" duration="35912000" />
       <workItem from="1610465630105" duration="181464000" />
       <workItem from="1611842693339" duration="50000" />
-      <workItem from="1611842956459" duration="40776000" />
+      <workItem from="1611842956459" duration="42549000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -345,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611783665656</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers">
+      <created>1611947017687</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1611947017687</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,6 +368,7 @@
     <MESSAGE value="perform db migrate after build" />
     <MESSAGE value="ok so we're not supposed to do that" />
     <MESSAGE value="catch and redirect to welcome page with error message modal when id not found" />
-    <option name="LAST_COMMIT_MESSAGE" value="catch and redirect to welcome page with error message modal when id not found" />
+    <MESSAGE value="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers" />
   </component>
 </project>
