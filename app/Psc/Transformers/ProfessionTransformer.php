@@ -10,20 +10,30 @@ namespace App\Psc\Transformers;
  */
 class ProfessionTransformer extends Transformer {
 
+    protected $expertiseTransformer;
+
+    /**
+     * Create a new controller instance.
+     *
+     */
+    public function __construct()
+    {
+        $this->expertiseTransformer = new ExpertiseTransformer();
+    }
+
     /**
      * transform Profession into a protected Profession.
      *
      * @param $profession
-     * @return array
+     * @return mixed
      */
-    public function transform($profession): array
+    public function transform($profession)
     {
-        return [
-            'code' => $profession['code'],
-            'categoryCode' => $profession['categoryCode'],
-            'salutationCode' => $profession['salutationCode'],
-            'lastName' => $profession['lastName'],
-            'firstName' => $profession['firstName']
-        ];
+        $protectedProfession = $profession;
+        if (isset($profession['expertises'])) {
+            $protectedProfession['expertises'] = $this->expertiseTransformer->transformCollection($profession['expertises']);
+        }
+
+        return $protectedProfession;
     }
 }

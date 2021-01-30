@@ -14,6 +14,8 @@ class Expertise extends Model {
 
     protected $connection = 'mongodb';
 
+    protected $primaryKey = 'code';
+
     protected $fillable = [
         'code',
         'categoryCode',

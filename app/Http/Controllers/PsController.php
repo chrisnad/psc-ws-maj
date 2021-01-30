@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ps;
-use App\Psc\Transformers\ProfessionTransformer;
+use App\Psc\Transformers\ExpertiseTransformer;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -25,7 +25,7 @@ class PsController extends Controller
      */
     public function __construct()
     {
-        $this->psTransformer = new ProfessionTransformer();
+        $this->psTransformer = new ExpertiseTransformer();
         $this->middleware('auth');
     }
 

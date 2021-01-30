@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Profession;
 use App\Models\Ps;
-use App\Psc\Transformers\ProfessionTransformer;
+use App\Psc\Transformers\ExpertiseTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProfessionController extends ApiController
@@ -18,7 +17,7 @@ class ProfessionController extends ApiController
      */
     public function __construct()
     {
-        $this->professionTransformer = new ProfessionTransformer();
+        $this->professionTransformer = new ExpertiseTransformer();
     }
 
     /**
@@ -32,12 +31,10 @@ class ProfessionController extends ApiController
         try {
             $professions = Ps::findOrFail($nationalId)->professions;
         } catch(ModelNotFoundException $e) {
-            return $this->responseNotFound("Ce professionel n'exist pas.");
+            return $this->notFoundResponse("Ce professionel n'exist pas.");
         }
 
-        return $this->respond([
-            'data' => $this->professionTransformer->transformCollection($professions->all())
-        ]);
+        return $this->successResponse($this->professionTransformer->transformCollection($professions->all()));
     }
 
     /**
@@ -48,19 +45,17 @@ class ProfessionController extends ApiController
      */
     public function store($nationalId)
     {
-        $profession = request()->all();
+        $profession = array_filter(request()->all());
 
         try {
             $ps = Ps::findOrFail($nationalId);
         } catch(ModelNotFoundException $e) {
-            return $this->responseNotFound("Ce professionel n'exist pas.");
+            return $this->notFoundResponse("Ce professionel n'exist pas.");
         }
 
         $ps->professions()->create($profession);
 
-        return $this->respond([
-            'message' => "Creation de l'exercice professionnel avec succès."
-        ]);
+        return $this->successResponse(null, "Creation de l'exercice professionnel avec succès.");
     }
 
     /**
@@ -75,44 +70,40 @@ class ProfessionController extends ApiController
         try {
             $professions = Ps::findOrFail($nationalId)->professions;
         } catch(ModelNotFoundException $e) {
-            return $this->responseNotFound("Ce Ps n'exist pas.");
+            return $this->notFoundResponse("Ce Ps n'exist pas.");
         }
 
         $profession = $professions->firstWhere('code', $code);
 
         if ($profession) {
-            return $this->respond([
-                'data' => $this->professionTransformer->transform($profession)
-            ]);
+            return $this->successResponse($this->professionTransformer->transform($profession));
         } else {
-            return $this->responseNotFound("Cet exercice professionnel n'exist pas.");
+            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param $nationalId
      * @param $code
      * @return mixed
      */
     public function update($nationalId, $code)
     {
-
         try {
             $professions = Ps::findOrFail($nationalId)->professions;
         } catch(ModelNotFoundException $e) {
-            return $this->responseNotFound("Ce Ps n'exist pas.");
+            return $this->notFoundResponse("Ce Ps n'exist pas.");
         }
 
         $profession = $professions->firstWhere('code', $code);
 
         if ($profession) {
-            $profession->update(request()->all(), ['upsert' => true]);
-            return $this->respond([
-                'message' => "Mise à jour de l'exercise pro avec succès."
-            ]);
+            $profession->update(array_filter(request()->all()), ['upsert' => true]);
+            return $this->successResponse(null, "Mise à jour de l'exercise pro avec succès.");
         } else {
-            return $this->responseNotFound("Cet exercice professionnel n'exist pas.");
+            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
         }
     }
 
@@ -125,7 +116,20 @@ class ProfessionController extends ApiController
      */
     public function destroy($nationalId, $code)
     {
-        //
+        try {
+            $professions = Ps::findOrFail($nationalId)->professions;
+        } catch(ModelNotFoundException $e) {
+            return $this->notFoundResponse("Ce professionel n'exist pas.");
+        }
+
+        $profession = $professions->firstWhere('code', $code);
+
+        if ($profession) {
+            $profession->delete();
+            return $this->successResponse(null, "Suppression de l'exercise pro avec succès.");
+        } else {
+            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
+        }
     }
 
 }

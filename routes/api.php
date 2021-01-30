@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ExpertiseController;
 use App\Http\Controllers\Api\ProfessionController;
 use App\Http\Controllers\Api\PsController;
 use Illuminate\Support\Facades\Route;
@@ -34,11 +35,14 @@ Route::resource('ps', PsController::class,
         'destroy' => 'api.ps.destroy'
 ]);
 
-//Route::resource('professions', ProfessionController::class,
-//    ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
-
 Route::get('ps/{ps}/professions', [ProfessionController::class, 'index']);
 Route::post('ps/{ps}/professions', [ProfessionController::class, 'store']);
 Route::get('ps/{ps}/professions/{profession}', [ProfessionController::class, 'show']);
 Route::put('ps/{ps}/professions/{profession}', [ProfessionController::class, 'update']);
 Route::delete('ps/{ps}/professions/{profession}', [ProfessionController::class, 'destroy']);
+
+Route::get('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'index']);
+Route::post('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'store']);
+Route::get('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'show']);
+Route::put('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'update']);
+Route::delete('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'destroy']);

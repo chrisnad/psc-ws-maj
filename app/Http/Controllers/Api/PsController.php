@@ -28,9 +28,7 @@ class PsController extends ApiController
     public function index()
     {
         $psList = Ps::all();
-        return $this->respond([
-            'data' => $this->psTransformer->transformCollection($psList->all())
-        ]);
+        return $this->successResponse($this->psTransformer->transformCollection($psList->all()));
     }
 
     /**
@@ -40,18 +38,12 @@ class PsController extends ApiController
      */
     public function store()
     {
-//        if (! request()->input('phone') and ! request()->input('email')){
-//            return $this->setStatusCode(400)->respondWithError('Erreur au niveau des paramètres renseignés');
-//        }
-
-        $ps = request()->all();
+        $ps = array_filter(request()->all());
         $ps['nationalId'] = (string) Str::uuid();
 
         Ps::create($ps);
 
-        return $this->respond([
-            'message' => 'Creation avec succès.'
-        ]);
+        return $this->successResponse(null, 'Creation avec succès');
     }
 
     /**
@@ -65,31 +57,27 @@ class PsController extends ApiController
         try {
             $ps = Ps::findOrFail($id);
         } catch(ModelNotFoundException $e) {
-            return $this->responseNotFound("Ce professionel n'exist pas.");
+            return $this->notFoundResponse("Ce professionel n'exist pas.");
         }
-        return $this->respond([
-            'data' => $this->psTransformer->transform($ps)
-        ]);
+        return $this->successResponse($this->psTransformer->transform($ps));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Ps $ps
+     * @param $id
      * @return mixed
      */
-    public function update(Ps $ps)
+    public function update($id)
     {
-        if (! request()->input('phone') and ! request()->input('email')){
-            return $this->setStatusCode(400)->respondWithError('Erreur au niveau des paramètres renseignés');
+        try {
+            $ps = Ps::findOrFail($id);
+        } catch(ModelNotFoundException $e) {
+            return $this->notFoundResponse("Ce professionel n'exist pas.");
         }
-
-        // TODO: this updates in our database, adapt for WS
         $ps->update(array_filter(request()->all()));
 
-        return $this->respond([
-            'message' => 'Mise à jour du Ps avec succès.'
-        ]);
+        return $this->successResponse(null, 'Mise à jour du Ps avec succès.');
     }
 
     /**
@@ -103,12 +91,10 @@ class PsController extends ApiController
         try {
             $ps = Ps::findOrFail($id);
         } catch(ModelNotFoundException $e) {
-            return $this->responseNotFound("Ce professionel n'exist pas.");
+            return $this->notFoundResponse("Ce professionel n'exist pas.");
         }
         $ps->delete();
-        return $this->respond([
-            'message' => 'Supression du Ps avec succès.'
-        ]);
+        return $this->successResponse(null, 'Supression du Ps avec succès.');
     }
 
 }

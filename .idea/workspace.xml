@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers">
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="added nested profession update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ProfessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ProfessionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Profession.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Profession.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Expertise.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Expertise.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Ps.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Ps.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Psc/Transformers/ProfessionTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Psc/Transformers/ProfessionTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +192,7 @@
       <workItem from="1610353434454" duration="35912000" />
       <workItem from="1610465630105" duration="181464000" />
       <workItem from="1611842693339" duration="50000" />
-      <workItem from="1611842956459" duration="42549000" />
+      <workItem from="1611842956459" duration="61974000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -334,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611947017687</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added nested profession update">
+      <created>1611948689801</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1611948689801</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,6 +383,7 @@
     <MESSAGE value="ok so we're not supposed to do that" />
     <MESSAGE value="catch and redirect to welcome page with error message modal when id not found" />
     <MESSAGE value="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers" />
+    <MESSAGE value="added nested profession update" />
+    <option name="LAST_COMMIT_MESSAGE" value="added nested profession update" />
   </component>
 </project>
