@@ -51,6 +51,7 @@ class LoginController extends Controller
     public function handleProviderCallback($provider)
     {
         $providerUser = Socialite::driver($provider)->user();
+        //$providerUser = Socialite::driver($provider)->stateless()->user();
 
         // Get user from DB or create if provider id is new
         $user = User::firstOrCreate(
@@ -66,7 +67,8 @@ class LoginController extends Controller
         );
 
         // Login the user
-        Auth::login($user, false);
+        Auth::login($user, true);
+        //JWTAuth::fromUser($user)
 
         // Redirect to welcome page
         return redirect()->route('welcome');

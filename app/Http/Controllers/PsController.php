@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ps;
-use App\Psc\Transformers\ExpertiseTransformer;
+use App\Psc\Transformers\PsTransformer;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -25,7 +25,7 @@ class PsController extends Controller
      */
     public function __construct()
     {
-        $this->psTransformer = new ExpertiseTransformer();
+        $this->psTransformer = new PsTransformer();
         $this->middleware('auth');
     }
 
@@ -83,7 +83,9 @@ class PsController extends Controller
             ]);
         }
 
-        return redirect()->route('ps.show', $ps['nationalId']);
+        return redirect()->route('ps.show', [
+            'ps' => $ps
+        ]);
     }
 
     /**
@@ -106,7 +108,8 @@ class PsController extends Controller
     public function edit(Ps $ps)
     {
         return view('ps.edit', [
-            'ps' => $this->psTransformer->transform($ps)]);
+            'ps' => $this->psTransformer->transform($ps)
+        ]);
     }
 
     /**
