@@ -11,6 +11,8 @@ class Structure extends Model {
 
     protected $connection = 'mongodb';
 
+    protected $primaryKey = 'structureTechnicalId';
+
     protected $fillable = [
         'siteSIRET',
         'siteSIREN',

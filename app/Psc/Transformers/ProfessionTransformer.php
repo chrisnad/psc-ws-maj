@@ -11,6 +11,7 @@ namespace App\Psc\Transformers;
 class ProfessionTransformer extends Transformer {
 
     protected $expertiseTransformer;
+    protected $workSituationTransformer;
 
     /**
      * Create a new controller instance.
@@ -19,6 +20,7 @@ class ProfessionTransformer extends Transformer {
     public function __construct()
     {
         $this->expertiseTransformer = new ExpertiseTransformer();
+        $this->workSituationTransformer = new WorkSituationTransformer();
     }
 
     /**
@@ -32,6 +34,9 @@ class ProfessionTransformer extends Transformer {
         $protectedProfession = $profession;
         if (isset($profession['expertises'])) {
             $protectedProfession['expertises'] = $this->expertiseTransformer->transformCollection($profession['expertises']);
+        }
+        if (isset($profession['situations'])) {
+            $protectedProfession['situations'] = $this->workSituationTransformer->transformCollection($profession['situations']);
         }
 
         return $protectedProfession;

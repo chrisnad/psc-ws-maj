@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Ps;
+use App\Models\Structure;
 use Exception;
-use Illuminate\Support\Str;
 
-class PsController extends ApiController
+class StructureController extends ApiController
 {
 
     /**
@@ -15,8 +14,8 @@ class PsController extends ApiController
      */
     public function index()
     {
-        $psList = Ps::all();
-        return $this->successResponse($this->psTransformer->transformCollection($psList->all()));
+        $structures = Structure::all();
+        return $this->successResponse($this->structureTransformer->transformCollection($structures->all()));
     }
 
     /**
@@ -26,10 +25,9 @@ class PsController extends ApiController
      */
     public function store()
     {
-        $ps = array_filter(request()->all());
-        $ps['nationalId'] = (string) Str::uuid();
+        $structure = array_filter(request()->all());
 
-        Ps::create($ps);
+        Structure::create($structure);
         return $this->successResponse(null, 'Creation avec succès');
     }
 
@@ -41,8 +39,8 @@ class PsController extends ApiController
      */
     public function show($id)
     {
-        $ps = $this->getPs($id);
-        return $this->successResponse($this->psTransformer->transform($ps));
+        $structure = $this->getStructure($id);
+        return $this->successResponse($this->structureTransformer->transform($structure));
     }
 
     /**
@@ -53,9 +51,9 @@ class PsController extends ApiController
      */
     public function update($id)
     {
-        $ps = $this->getPs($id);
-        $ps->update(array_filter(request()->all()));
-        return $this->successResponse(null, 'Mise à jour du Ps avec succès.');
+        $structure = $this->getStructure($id);
+        $structure->update(array_filter(request()->all()));
+        return $this->successResponse(null, 'Mise à jour de la Structure avec succès.');
     }
 
     /**
@@ -67,9 +65,9 @@ class PsController extends ApiController
      */
     public function destroy($id)
     {
-        $ps = $this->getPs($id);
-        $ps->delete();
-        return $this->successResponse(null, 'Supression du Ps avec succès.');
+        $structure = $this->getStructure($id);
+        $structure->delete();
+        return $this->successResponse(null, 'Supression de la Structure avec succès.');
     }
 
 }

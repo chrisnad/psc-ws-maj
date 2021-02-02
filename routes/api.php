@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\ExpertiseController;
+use App\Http\Controllers\Api\StructureController;
+use App\Http\Controllers\Api\WorkSituationController;
 use App\Http\Controllers\Api\ProfessionController;
 use App\Http\Controllers\Api\PsController;
 use Illuminate\Support\Facades\Route;
@@ -46,3 +48,12 @@ Route::post('ps/{ps}/professions/{profession}/expertises', [ExpertiseController:
 Route::get('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'show']);
 Route::put('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'update']);
 Route::delete('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'destroy']);
+
+Route::get('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'index']);
+Route::post('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'store']);
+Route::get('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'show']);
+Route::put('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'update']);
+Route::delete('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'destroy']);
+
+Route::resource('structures', StructureController::class,
+    ['only' => ['index', 'store', 'show', 'update', 'destroy']]);

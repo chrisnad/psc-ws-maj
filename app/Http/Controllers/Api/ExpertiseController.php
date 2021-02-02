@@ -2,174 +2,85 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Ps;
-use App\Psc\Transformers\ExpertiseTransformer;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
 class ExpertiseController extends ApiController
 {
-
-    protected $expertiseTransformer;
-
-    /**
-     * Create a new controller instance.
-     *
-     */
-    public function __construct()
-    {
-        $this->expertiseTransformer = new ExpertiseTransformer();
-    }
 
     /**
      * Display a listing of the resource.
      *
-     * @param $nationalId
-     * @param $codePro
+     * @param $psId
+     * @param $exProId
      * @return mixed
      */
-    public function index($nationalId, $codePro)
+    public function index($psId, $exProId)
     {
-        try {
-            $professions = Ps::findOrFail($nationalId)->professions;
-        } catch(ModelNotFoundException $e) {
-            return $this->notFoundResponse("Ce professionel n'exist pas.");
-        }
-
-        $profession = $professions->firstWhere('code', $codePro);
-
-        if ($profession) {
-            $expertises = $profession->expertises;
-            return $this->successResponse($this->expertiseTransformer->transformCollection($expertises->all()));
-        } else {
-            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
-        }
+        $profession = $this->getExPro($psId, $exProId);
+        return $this->successResponse($this->expertiseTransformer->transformCollection(
+            $profession->expertises()->toArray()));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param $nationalId
-     * @param $codePro
+     * @param $psId
+     * @param $exProId
      * @return mixed
      */
-    public function store($nationalId, $codePro)
+    public function store($psId, $exProId)
     {
+        $profession = $this->getExPro($psId, $exProId);
         $expertise = array_filter(request()->all());
 
-        try {
-            $professions = Ps::findOrFail($nationalId)->professions;
-        } catch(ModelNotFoundException $e) {
-            return $this->notFoundResponse("Ce professionel n'exist pas.");
-        }
+        $profession->expertises()->create($expertise);
+        return $this->successResponse(null, "Creation de l'expertise avec succès.");
 
-        $profession = $professions->firstWhere('code', $codePro);
-
-        if ($profession) {
-            $profession->expertises()->create($expertise);
-            return $this->successResponse(null, "Creation de l'expertise avec succès.");
-        } else {
-            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
-        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param $nationalId
-     * @param $codePro
-     * @param $code
+     * @param $psId
+     * @param $exProId
+     * @param $expertiseId
      * @return mixed
      */
-    public function show($nationalId, $codePro, $code)
+    public function show($psId, $exProId, $expertiseId)
     {
-        try {
-            $professions = Ps::findOrFail($nationalId)->professions;
-        } catch(ModelNotFoundException $e) {
-            return $this->notFoundResponse("Ce Ps n'exist pas.");
-        }
-
-        $profession = $professions->firstWhere('code', $codePro);
-
-        if ($profession) {
-            $expertises = $profession->expertises;
-        } else {
-            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
-        }
-
-        $expertise = $expertises->firstWhere('code', $code);
-
-        if ($expertise) {
-            return $this->successResponse($this->expertiseTransformer->transform($expertise));
-        } else {
-            return $this->notFoundResponse("Cette expertise n'exist pas.");
-        }
+        $expertise = $this->getExpertise($psId, $exProId, $expertiseId);
+        return $this->successResponse($this->expertiseTransformer->transform($expertise));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param $nationalId
-     * @param $codePro
-     * @param $code
+     * @param $psId
+     * @param $exProId
+     * @param $expertiseId
      * @return mixed
      */
-    public function update($nationalId, $codePro, $code)
+    public function update($psId, $exProId, $expertiseId)
     {
-        try {
-            $professions = Ps::findOrFail($nationalId)->professions;
-        } catch(ModelNotFoundException $e) {
-            return $this->notFoundResponse("Ce Ps n'exist pas.");
-        }
+        $expertise = $this->getExpertise($psId, $exProId, $expertiseId);
+        $updatedExpertise = array_filter(request()->all());
 
-        $profession = $professions->firstWhere('code', $codePro);
+        $expertise->update($updatedExpertise, ['upsert' => false]);
+        return $this->successResponse(null, "Mise à jour du savoir faire avec succès.");
 
-        if ($profession) {
-            $expertises = $profession->expertises;
-        } else {
-            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
-        }
-
-        $expertise = $expertises->firstWhere('code', $code);
-
-        if ($expertise) {
-            $expertise->update(array_filter(request()->all()), ['upsert' => true]);
-            return $this->successResponse(null, "Mise à jour de l'expertise avec succès.");
-        } else {
-            return $this->notFoundResponse("Cette expertise n'existe pas.");
-        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param $nationalId
-     * @param $codePro
-     * @param $code
+     * @param $psId
+     * @param $exProId
+     * @param $expertiseId
      * @return mixed
      */
-    public function destroy($nationalId, $codePro, $code)
+    public function destroy($psId, $exProId, $expertiseId)
     {
-        try {
-            $professions = Ps::findOrFail($nationalId)->professions;
-        } catch(ModelNotFoundException $e) {
-            return $this->notFoundResponse("Ce professionel n'exist pas.");
-        }
+        $expertise = $this->getExpertise($psId, $exProId, $expertiseId);
 
-        $profession = $professions->firstWhere('code', $codePro);
-
-        if ($profession) {
-            $expertises = $profession->expertises;
-        } else {
-            return $this->notFoundResponse("Cet exercice professionnel n'exist pas.");
-        }
-
-        $expertise = $expertises->firstWhere('code', $code);
-
-        if ($expertise) {
-            $expertise->delete();
-            return $this->successResponse(null, "Suppression de l'expertise avec succès.");
-        } else {
-            return $this->notFoundResponse("Cette expertise n'existe pas.");
-        }
+        $expertise->delete();
+        return $this->successResponse(null, "Suppression de l'expertise avec succès.");
     }
 }

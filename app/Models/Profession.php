@@ -6,9 +6,7 @@ namespace App\Models;
 
 
 use Jenssegers\Mongodb\Eloquent\Model;
-use Jenssegers\Mongodb\Relations\BelongsTo;
 use Jenssegers\Mongodb\Relations\EmbedsMany;
-use Jenssegers\Mongodb\Relations\HasMany;
 
 /**
  * Profession
@@ -17,9 +15,10 @@ class Profession extends Model {
 
     protected $connection = 'mongodb';
 
-    protected $primaryKey = 'code';
+    protected $primaryKey = 'exProId';
 
     protected $fillable = [
+        'exProId',
         'code',
         'categoryCode',
         'salutationCode',

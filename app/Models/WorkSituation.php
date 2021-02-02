@@ -15,6 +15,8 @@ class WorkSituation extends Model {
 
     protected $connection = 'mongodb';
 
+    protected $primaryKey = 'modeCode';
+
     protected $fillable = [
         'modeCode',
         'activitySectorCode',
