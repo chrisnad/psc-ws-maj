@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="- refactoring api controllers&#10;- implemented structure and situation api controller">
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="bug fix with ps[name] vs ps[firstName]">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/psc-ws-maj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/psc-ws-maj.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ps/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,6 +137,8 @@
       <path value="$PROJECT_DIR$/vendor/jenssegers/mongodb" />
       <path value="$PROJECT_DIR$/vendor/mongodb/mongodb" />
       <path value="$PROJECT_DIR$/vendor/jean85/pretty-package-versions" />
+      <path value="$PROJECT_DIR$/vendor/bschmitt/laravel-amqp" />
+      <path value="$PROJECT_DIR$/vendor/php-amqplib/php-amqplib" />
     </include_path>
   </component>
   <component name="ProjectId" id="1munUXK4zkN0YEPuKDqA6I4HETh" />
@@ -150,18 +151,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TF_FMT" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Psc/Transformers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/config" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cnader\Desktop\projects2021\eSanteWallet\psc-ws-maj\config" />
       <recent name="C:\Users\cnader\Desktop\projects2021\eSanteWallet\psc-ws-maj\app\Psc\Transformers" />
       <recent name="C:\Users\cnader\Desktop\projects2021\eSanteWallet\psc-ws-maj\app\Http\Controllers\Api" />
       <recent name="C:\Users\cnader\Desktop\projects2021\eSanteWallet\psc-ws-maj\app\Models" />
       <recent name="C:\Users\cnader\Desktop\projects2021\eSanteWallet\psc-ws-maj\resources\views\sub" />
-      <recent name="C:\Users\cnader\Desktop\projects2021\eSanteWallet\psc-ws-maj\public\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\cnader\Desktop\projects2021\eSanteWallet\psc-ws-maj\public\images" />
@@ -187,7 +188,7 @@
       <workItem from="1610353434454" duration="35912000" />
       <workItem from="1610465630105" duration="181464000" />
       <workItem from="1611842693339" duration="50000" />
-      <workItem from="1611842956459" duration="99150000" />
+      <workItem from="1611842956459" duration="104337000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -357,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612252309258</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="bug fix with ps[name] vs ps[firstName]">
+      <created>1612265189742</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1612265189742</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,6 +403,7 @@
     <MESSAGE value="added nested profession update" />
     <MESSAGE value="Finished implementing nested profession and nested expertise.&#10;We now handle general api exceptions.&#10;Simplified api responses model" />
     <MESSAGE value="- refactoring api controllers&#10;- implemented structure and situation api controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="- refactoring api controllers&#10;- implemented structure and situation api controller" />
+    <MESSAGE value="bug fix with ps[name] vs ps[firstName]" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fix with ps[name] vs ps[firstName]" />
   </component>
 </project>
