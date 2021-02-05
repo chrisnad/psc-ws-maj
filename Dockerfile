@@ -56,7 +56,8 @@ RUN pecl install mongodb && docker-php-ext-enable mongodb
 
 RUN docker-php-ext-install \
     pdo_mysql \
-    exif
+    exif \
+    sockets
 
 # 5. composer
 ENV COMPOSER_HOME /composer

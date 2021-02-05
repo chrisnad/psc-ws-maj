@@ -22,6 +22,8 @@
 
     <!-- favicon -->
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}" type="image/x-icon"/>
+
+    @stack('dropzone')
 </head>
 <body>
     <div id="app">

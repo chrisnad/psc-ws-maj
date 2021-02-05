@@ -29,7 +29,8 @@ class Ps extends Model {
         'genderCode',
         'phone',
         'email',
-        'salutationCode'];
+        'salutationCode',
+        ];
 
     /**
      * Get the professions for this Ps.

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PsController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,10 @@ Route::put('/ps/{ps}', [PsController::class, 'update'])
 Route::get('/ps/{ps}/edit', [PsController::class, 'edit'])
     ->name('ps.edit');
 
+Route::get('/files', [FileController::class, 'index'])
+    ->name('files.index');
+Route::post('/files', [FileController::class, 'parse'])
+    ->name('files.parse');
 
 Route::get('/auth/{provider}/redirect', [LoginController::class, 'redirectToProvider'])
     ->name('auth.redirect');
