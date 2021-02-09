@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@push('dropzone')
+@push('extra')
 
     <!-- Styles -->
     <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
     <!-- Scripts -->
-    <script src="{{ asset('js/dropzone.js')}}"></script>
+    <script src="{{ asset('js/dropzone.js') }}"></script>
 
 @endpush
 
@@ -13,55 +13,40 @@
 
     @component('sub.card', ['title' => 'Dépot du fichier'])
 
-{{--        <form method="post" action="{{ route('files.store') }}" enctype="multipart/form-data"--}}
+{{--        <form method="post" action="{{ route('files.upload') }}" enctype="multipart/form-data"--}}
 {{--              class="dropzone" id="dropzone">--}}
 {{--            @csrf--}}
+{{--            <label>--}}
+{{--                <input name='separator' type="text">--}}
+{{--            </label>--}}
 {{--            <button type="submit" id="submit-dropzone" class="btn btn-default btn-outline-primary">Submit</button>--}}
 {{--        </form>--}}
 
-{{--        {{ Form::open(['route'=>'files.parse', 'class'=>'dropzone', 'id'=>'dropzone', 'method'=>'POST',--}}
-{{--'files'=>true, 'enctype'=>'multipart/form-data']) }}--}}
-
-{{--        {{ Form::submit('Soumettre les changements', array('class' => 'btn btn-default btn-outline-primary', 'id' => 'submit-dropzone')) }}--}}
-
-{{--        {{ Form::close() }}--}}
+        <form method="post" action="{{ route('files.upload') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="col text-center input-group">
+                <input name='file' type='file' required>
+                <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
+                <p class="text-danger">{{ $errors->first('file') }}</p>
+            </div>
+            <div class="col text-center input-group pt-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Separateur</span>
+                </div>
+                <input name="separator" required type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                <p class="text-danger">{{ $errors->first('separator') }}</p>
+            </div>
+            <div class="col text-center form-group pt-5">
+                <button type="submit" class="btn btn-default btn-outline-primary">Charger le fichier</button>
+            </div>
+        </form>
 
         @isset($message)
-            @component('sub.modal-visible', ['name' => 'info-modal', 'path' => '/'])
+            @component('sub.modal-visible', ['name' => 'info-modal', 'path' => '/files'])
                 <h1>{{ $title }}</h1>
                 <p>{{ $message }}</p>
             @endcomponent
         @endif
-
-        {{ Form::open(['route'=>'files.parse', 'method'=>'POST', 'files'=>true, 'enctype'=>'multipart/form-data']) }}
-
-        <div><!-- File is required -->
-            {{ Form::file('file', array('required')) }}
-            <p class="text-danger">{{ $errors->first('file') }}</p>
-        </div>
-
-        <div class="form-group"><!-- Separator is required -->
-            {{ Form::label('separator', 'Separator :', array('class' => 'control-label')) }}
-            {{ Form::text('separator', null, array('required')) }}
-            <p class="text-danger">{{ $errors->first('separator') }}</p>
-        </div>
-
-        <div class="col text-center">
-            {{ Form::submit('Envoyer le fichier', array('class' => 'btn btn-default btn-outline-primary')) }}
-        </div>
-
-        {{ Form::close() }}
-
-        <!-- Form -->
-{{--        <form method='post' action="{{ route('files.parse') }}" enctype='multipart/form-data' >--}}
-{{--            @csrf--}}
-{{--            <input type='file' name='file' >--}}
-{{--            <label>--}}
-{{--                separator--}}
-{{--                <input type='text' name='separator' >--}}
-{{--            </label>--}}
-{{--            <input type='submit' name='submit' value='Upload File'>--}}
-{{--        </form>--}}
 
     @endcomponent
 

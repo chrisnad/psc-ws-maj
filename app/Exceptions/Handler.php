@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Http\Controllers\Api\ApiResponder;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -52,9 +53,12 @@ class Handler extends ExceptionHandler
 
     public function handleException($request, Exception $exception)
     {
-
         if ($exception instanceof MethodNotAllowedHttpException) {
             return $this->errorResponse('The specified method for the request is invalid', 405);
+        }
+
+        if ($exception instanceof AuthenticationException) {
+            return redirect($exception->redirectTo());
         }
 
         if ($exception instanceof NotFoundHttpException) {

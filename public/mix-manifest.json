@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/dropzone.js": "/js/dropzone.js",
+    "/js/increments.js": "/js/increments.js",
     "/css/app.css": "/css/app.css",
     "/css/dropzone.css": "/css/dropzone.css",
     "/css/modal.css": "/css/modal.css"

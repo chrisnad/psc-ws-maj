@@ -613,7 +613,6 @@ var Dropzone = /*#__PURE__*/function (_Emitter) {
             var args = Array.prototype.slice.call(arguments); // Look at the output in you browser console, if there is something interesting
 
             console.log(args);
-            console.log(response.session);
           });
         },
 
