@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PsController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +28,8 @@ use Illuminate\Support\Facades\Route;
 //    url()->forceScheme($proxy_schema);
 //}
 
-Route::get('/', function () {
-    return view('welcome', [
-        'title' => request()->title,
-        'message' => request()->message
-    ]);
-})->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])
+    ->name('welcome');
 
 //Auth::routes();
 
