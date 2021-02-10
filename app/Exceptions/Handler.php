@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ApiResponder;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -66,14 +68,26 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof HttpException) {
+            if ($exception->getPrevious() instanceof TokenMismatchException) {
+                // token mismatch is a security concern, ensure logout.
+                Auth::logout();
+
+                // Go to welcome page and tell the user.
+                return redirect(route('welcome', [
+                    'title' => 'Erreur',
+                    'message' => 'Votre session a expirée, veuillez vous reconnecter'
+                ]));
+            }
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
         }
 
-        if (config('app.debug')) {
-            return parent::render($request, $exception);
+//        if (config('app.debug')) {
+//            return parent::render($request, $exception);
+//        }
+
+        if (config('app.env') == 'production') {
+            return $this->internalErrorResponse('Unexpected Exception. Try later');
         }
-
-        return $this->internalErrorResponse('Unexpected Exception. Try later');
-
     }
+
 }

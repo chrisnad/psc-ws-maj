@@ -17,18 +17,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$proxy_url    = env('PROXY_URL');
-$proxy_schema = env('PROXY_SCHEMA');
-
-if(!empty($proxy_url)) {
-    url()->forceRootUrl($proxy_url);
-}
-if(!empty($proxy_schema)) {
-    url()->forceScheme($proxy_schema);
-}
+//$proxy_url    = env('PROXY_URL');
+//$proxy_schema = env('PROXY_SCHEMA');
+//
+//if(!empty($proxy_url)) {
+//    url()->forceRootUrl($proxy_url);
+//}
+//if(!empty($proxy_schema)) {
+//    url()->forceScheme($proxy_schema);
+//}
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'title' => request()->title,
+        'message' => request()->message
+    ]);
 })->name('welcome');
 
 //Auth::routes();

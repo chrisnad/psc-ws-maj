@@ -68,7 +68,7 @@ class LoginController extends Controller
 
         // Login the user
         Auth::login($user, true);
-        //JWTAuth::fromUser($user)
+        // JWTAuth::fromUser($user);
 
         // Redirect to welcome page
         return redirect()->route('welcome');

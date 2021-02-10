@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $collection) {
             $collection->string('name');
-            $collection->string('email')->unique()->nullable();
+            $collection->string('email')->nullable();
             $collection->timestamp('email_verified_at')->nullable();
             $collection->string('password')->nullable();
             $collection->rememberToken();
@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $collection->string('last_name')->nullable();
             $collection->string('provider')->nullable();
             $collection->string('provider_id')->nullable();
-            $collection->string('preferred_username')->unique()->nullable();
+            $collection->string('preferred_username')->nullable();
         });
     }
 

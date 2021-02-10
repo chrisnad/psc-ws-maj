@@ -3,8 +3,7 @@
 namespace App\Bschmitt\Amqp;
 
 use Closure;
-use App\Bschmitt\Amqp\Request;
-use App\Bschmitt\Amqp\Message;
+use Exception;
 
 /**
  * @author Björn Schmitt <code@bjoern.io>
@@ -13,15 +12,16 @@ class Amqp
 {
     /**
      * @param string $routing
-     * @param mixed  $message
-     * @param array  $properties
+     * @param mixed $message
+     * @param array $properties
+     * @throws Exception
      */
     public function publish($routing, $message, array $properties = [])
     {
         $properties['routing'] = $routing;
 
         /* @var Publisher $publisher */
-        $publisher = app()->make('App\Bschmitt\Amqp\Publisher');
+        $publisher = app()->make(Publisher::class);
         $publisher
             ->mergeProperties($properties)
             ->setup();
@@ -35,17 +35,17 @@ class Amqp
     }
 
     /**
-     * @param string  $queue
+     * @param string $queue
      * @param Closure $callback
-     * @param array   $properties
-     * @throws Exception\Configuration
+     * @param array $properties
+     * @throws Exception
      */
     public function consume($queue, Closure $callback, $properties = [])
     {
         $properties['queue'] = $queue;
 
         /* @var Consumer $consumer */
-        $consumer = app()->make('App\Bschmitt\Amqp\Consumer');
+        $consumer = app()->make(Consumer::class);
         $consumer
             ->mergeProperties($properties)
             ->setup();
@@ -57,7 +57,7 @@ class Amqp
     /**
      * @param string $body
      * @param array  $properties
-     * @return \App\Bschmitt\Amqp\Message
+     * @return Message
      */
     public function message($body, $properties = [])
     {

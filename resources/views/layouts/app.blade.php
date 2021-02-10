@@ -53,7 +53,7 @@
                         @guest
                             @if (Auth::guest())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/auth/prosanteconnect/redirect">{{ __('Se connecter') }}</a>
+                                    <a class="nav-link" href="{{ route('auth.redirect', 'prosanteconnect') }}">{{ __('Se connecter') }}</a>
                                 </li>
                             @endif
                         @else

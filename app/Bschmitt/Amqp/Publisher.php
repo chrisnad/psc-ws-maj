@@ -11,7 +11,6 @@ class Publisher extends Request
     /**
      * @param string  $routing
      * @param Message $message
-     * @throws Exception\Configuration
      */
     public function publish($routing, $message)
     {

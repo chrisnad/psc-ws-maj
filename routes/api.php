@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ExpertiseController;
 use App\Http\Controllers\Api\StructureController;
 use App\Http\Controllers\Api\WorkSituationController;
@@ -18,15 +19,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$proxy_url    = env('PROXY_URL');
-$proxy_schema = env('PROXY_SCHEMA');
+//$proxy_url    = env('PROXY_URL');
+//$proxy_schema = env('PROXY_SCHEMA');
+//
+//if(!empty($proxy_url)) {
+//    url()->forceRootUrl($proxy_url);
+//}
+//if(!empty($proxy_schema)) {
+//    url()->forceScheme($proxy_schema);
+//}
 
-if(!empty($proxy_url)) {
-    url()->forceRootUrl($proxy_url);
-}
-if(!empty($proxy_schema)) {
-    url()->forceScheme($proxy_schema);
-}
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::get('user-profile', [AuthController::class, 'userProfile']);
+
+});
 
 Route::resource('ps', PsController::class,
     ['only' => ['index', 'store', 'show', 'update', 'destroy']])

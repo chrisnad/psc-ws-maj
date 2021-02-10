@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Psc-ws-maj'),
+    'name' => env('APP_NAME', 'psc-ws-maj'),
+
+    'context_root' => env('CONTEXT_ROOT', 'psc-ws-maj'),
 
     /*
     |--------------------------------------------------------------------------

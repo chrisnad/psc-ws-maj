@@ -42,7 +42,7 @@ abstract class Context
      * @param array $properties
      * @return $this
      */
-    public function mergeProperties(array $properties)
+    public function mergeProperties(array $properties): Context
     {
         $this->properties = array_merge($this->properties, $properties);
         return $this;
@@ -51,7 +51,7 @@ abstract class Context
     /**
      * @return array
      */
-    public function getProperties()
+    public function getProperties(): array
     {
         return $this->properties;
     }

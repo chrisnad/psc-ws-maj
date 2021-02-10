@@ -16,9 +16,9 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'default' => [
+    'properties' => [
 
-        'production' => [
+        'default' => [
             'host'                  => env('RABBITMQ_HOST', 'localhost'),
             'port'                  => env('RABBITMQ_PORT', 5672),
             'username'              => env('RABBITMQ_USER', 'guest'),
