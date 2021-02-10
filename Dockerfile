@@ -9,8 +9,9 @@ RUN apt-get update
 RUN apt-get install -y \
     git \
     zip \
-    pkg-config \
     libcurl4-openssl-dev \
+    pkg-config \
+    libssl-dev \
     curl \
     wget \
     sudo \
