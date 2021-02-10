@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PsController;
 use Illuminate\Support\Facades\Route;
@@ -16,18 +17,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$proxy_url    = env('PROXY_URL');
-$proxy_schema = env('PROXY_SCHEMA');
-
-if(!empty($proxy_url)) {
-    url()->forceRootUrl($proxy_url);
-}
-if(!empty($proxy_schema)) {
-    url()->forceScheme($proxy_schema);
-}
+//$proxy_url    = env('PROXY_URL');
+//$proxy_schema = env('PROXY_SCHEMA');
+//
+//if(!empty($proxy_url)) {
+//    url()->forceRootUrl($proxy_url);
+//}
+//if(!empty($proxy_schema)) {
+//    url()->forceScheme($proxy_schema);
+//}
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'title' => request()->title,
+        'message' => request()->message
+    ]);
 })->name('welcome');
 
 //Auth::routes();
@@ -47,6 +51,16 @@ Route::put('/ps/{ps}', [PsController::class, 'update'])
 Route::get('/ps/{ps}/edit', [PsController::class, 'edit'])
     ->name('ps.edit');
 
+Route::get('/files', [FileController::class, 'index'])
+    ->name('files.index');
+Route::post('/files', [FileController::class, 'upload'])
+    ->name('files.upload');
+Route::get('/files/validation', [FileController::class, 'validation'])
+    ->name('files.validation');
+Route::get('/files/validation/{page}', [FileController::class, 'getPage']);
+
+Route::get('/files/publish', [FileController::class, 'publish'])
+    ->name('files.publish');
 
 Route::get('/auth/{provider}/redirect', [LoginController::class, 'redirectToProvider'])
     ->name('auth.redirect');

@@ -4,24 +4,40 @@
  */
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Jenssegers\Mongodb\Eloquent\Model;
+use Jenssegers\Mongodb\Relations\EmbedsMany;
 
 /**
  * Ps
  */
 class Ps extends Model {
 
+    protected $connection = 'mongodb';
+
     protected $primaryKey = 'nationalId';
 
-    protected $fillable = ['email', 'phone'];
+    protected $fillable = [
+        'idType',
+        'id',
+        'nationalId',
+        'lastName',
+        'firstName',
+        'dateOfBirth',
+        'birthAddressCode',
+        'birthCountryCode',
+        'birthAddress',
+        'genderCode',
+        'phone',
+        'email',
+        'salutationCode',
+        ];
 
     /**
      * Get the professions for this Ps.
      */
-    public function professions(): HasMany
+    public function professions(): EmbedsMany
     {
-        return $this->hasMany(PsProfessionalInfo::class);
+        return $this->embedsMany(Profession::class);
     }
 
 }

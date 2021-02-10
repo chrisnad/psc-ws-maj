@@ -22,6 +22,8 @@
 
     <!-- favicon -->
     <link rel="icon" href="{{ URL::asset('images/favicon.ico') }}" type="image/x-icon"/>
+
+    @stack('extra')
 </head>
 <body>
     <div id="app">
@@ -31,6 +33,10 @@
                     <span style="color:rgb(27,113,184);">Pro Santé </span>
                     <span style="color:rgb(214,10,82);">Connect</span>
                 </a>
+                <a class="navbar-brand font-weight-bold" href="{{ url('/files') }}">
+                    <span style="color:rgb(27,113,184);">- Files</span>
+                </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -47,7 +53,7 @@
                         @guest
                             @if (Auth::guest())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/auth/prosanteconnect/redirect">{{ __('Se connecter') }}</a>
+                                    <a class="nav-link" href="{{ route('auth.redirect', 'prosanteconnect') }}">{{ __('Se connecter') }}</a>
                                 </li>
                             @endif
                         @else

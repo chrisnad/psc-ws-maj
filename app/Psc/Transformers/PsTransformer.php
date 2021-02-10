@@ -10,22 +10,32 @@ namespace App\Psc\Transformers;
  */
 class PsTransformer extends Transformer {
 
+    protected $professionTransformer;
+
+    /**
+     * Create a new controller instance.
+     *
+     */
+    public function __construct()
+    {
+        $this->professionTransformer = new ProfessionTransformer();
+    }
 
     /**
      * transform Ps into a protected Ps.
      *
      * @param $ps
-     * @return array
+     * @return mixed
      */
-    public function transform($ps): array
+    public function transform($ps)
     {
-        return [
-            'name' => $ps['name'],
-            'lastName' => $ps['lastName'],
-            'nationalId' => $ps['nationalId'],
-            'phone' => $this->hidePhone($ps['phone']),
-            'email' => $this->hideEmail($ps['email'])
-        ];
+        $protectedPs = $ps->toArray();
+        $protectedPs['phone'] = $this->hidePhone(isset($ps['phone']) ? $ps['phone'] : "");
+        $protectedPs['email'] = $this->hideEmail(isset($ps['email']) ? $ps['email'] : "");
+        if (isset($ps['professions'])) {
+            $protectedPs['professions'] = $this->professionTransformer->transformCollection($ps->professions->toArray());
+        }
+        return $protectedPs;
     }
 
     /**
@@ -54,7 +64,7 @@ class PsTransformer extends Transformer {
      */
     private function hidePhone($number): string
     {
-        if($number[0]=='+'){
+        if($number && $number[0]=='+'){
             return substr($number, 0, 4) . str_repeat('*', strlen($number)-6>0 ? strlen($number)-6 : 2) . substr($number, -2);
         }
         return substr($number, 0, 2) . str_repeat('*', strlen($number)-4>0 ? strlen($number)-4 : 2) . substr($number, -2);

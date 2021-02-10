@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ExpertiseController;
+use App\Http\Controllers\Api\StructureController;
+use App\Http\Controllers\Api\WorkSituationController;
+use App\Http\Controllers\Api\ProfessionController;
 use App\Http\Controllers\Api\PsController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,16 +19,57 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$proxy_url    = env('PROXY_URL');
-$proxy_schema = env('PROXY_SCHEMA');
+//$proxy_url    = env('PROXY_URL');
+//$proxy_schema = env('PROXY_SCHEMA');
+//
+//if(!empty($proxy_url)) {
+//    url()->forceRootUrl($proxy_url);
+//}
+//if(!empty($proxy_schema)) {
+//    url()->forceScheme($proxy_schema);
+//}
 
-if(!empty($proxy_url)) {
-    url()->forceRootUrl($proxy_url);
-}
-if(!empty($proxy_schema)) {
-    url()->forceScheme($proxy_schema);
-}
+Route::group([
 
-Route::get('/ps', [PsController::class, 'index']);
-Route::get('/ps/{ps}', [PsController::class, 'show']);
-Route::put('/ps/{ps}', [PsController::class, 'update']);
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::get('user-profile', [AuthController::class, 'userProfile']);
+
+});
+
+Route::resource('ps', PsController::class,
+    ['only' => ['index', 'store', 'show', 'update', 'destroy']])
+    ->names(['index' => 'api.ps.index',
+        'store' => 'api.ps.store',
+        'show' => 'api.ps.show',
+        'update' => 'api.ps.update',
+        'destroy' => 'api.ps.destroy'
+]);
+
+Route::get('ps/{ps}/professions', [ProfessionController::class, 'index']);
+Route::post('ps/{ps}/professions', [ProfessionController::class, 'store']);
+Route::get('ps/{ps}/professions/{profession}', [ProfessionController::class, 'show']);
+Route::put('ps/{ps}/professions/{profession}', [ProfessionController::class, 'update']);
+Route::delete('ps/{ps}/professions/{profession}', [ProfessionController::class, 'destroy']);
+
+Route::get('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'index']);
+Route::post('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'store']);
+Route::get('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'show']);
+Route::put('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'update']);
+Route::delete('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'destroy']);
+
+Route::get('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'index']);
+Route::post('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'store']);
+Route::get('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'show']);
+Route::put('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'update']);
+Route::delete('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'destroy']);
+
+Route::resource('structures', StructureController::class,
+    ['only' => ['index', 'store', 'show', 'update', 'destroy']]);

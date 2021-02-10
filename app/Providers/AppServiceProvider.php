@@ -23,6 +23,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $proxy_url    = env('PROXY_URL');
+        $proxy_schema = env('PROXY_SCHEMA');
+        $context_root = config('app.context_root');
+
+        if(!empty($proxy_url)) {
+            url()->forceRootUrl($proxy_url.'/'.$context_root.'/');
+        }
+        if(!empty($proxy_schema)) {
+            url()->forceScheme($proxy_schema);
+        }
     }
 }
