@@ -22,7 +22,9 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libreadline-dev \
     libfreetype6-dev \
-    g++
+    g++ \
+   && apt-get clean \
+   && rm -rf /var/lib/apt/lists/*
 
 ENV NODE_VERSION 15.6.0
 ENV NVM_DIR /usr/local/nvm
@@ -52,12 +54,14 @@ RUN a2enmod rewrite headers
 # 4. start with base php config, then add extensions
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
-RUN pecl install mongodb && docker-php-ext-enable mongodb
-
 RUN docker-php-ext-install \
     pdo_mysql \
     exif \
     sockets
+# 4.1 install a third-party extension
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb \
+    && echo "extension=mongodb.so" >> "$PHP_INI_DIR/php.ini"
 
 # 5. composer
 ENV COMPOSER_HOME /composer
