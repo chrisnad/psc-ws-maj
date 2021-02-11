@@ -9,9 +9,8 @@ RUN apt-get update
 RUN apt-get install -y \
     git \
     zip \
-    libcurl4-openssl-dev \
     pkg-config \
-    libssl-dev \
+    libcurl4-openssl-dev \
     curl \
     wget \
     sudo \
@@ -23,6 +22,7 @@ RUN apt-get install -y \
     libmcrypt-dev \
     libreadline-dev \
     libfreetype6-dev \
+    libssl-dev \
     g++ \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/*

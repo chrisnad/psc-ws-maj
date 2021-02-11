@@ -1,9 +1,9 @@
 <div id="{{ $name }}" class="custom-overlay-visible">
-    <a href="{{ $path }}" class="cancel"></a>
+    <a href="{{ route($route) }}" class="cancel"></a>
 
     <div class="custom-modal">
         {{ $slot }}
 
-        <a href="{{ $path }}" class="close">&times;</a>
+        <a href="{{ route($route) }}" class="close">&times;</a>
     </div>
 </div>

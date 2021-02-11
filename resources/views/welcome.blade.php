@@ -11,7 +11,7 @@
         @endif
 
         @isset($message)
-            @component('sub.modal-visible', ['name' => 'info-modal', 'path' => '/'])
+            @component('sub.modal-visible', ['name' => 'info-modal', 'route' => 'welcome'])
                 <h1>{{ $title }}</h1>
                 <p>{{ $message }}</p>
             @endcomponent

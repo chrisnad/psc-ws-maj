@@ -57,7 +57,7 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                <a href="/auth/prosanteconnect/redirect" class="btn btn-primary">
+                                <a href="{{ route('auth.redirect', 'prosanteconnect') }}" class="btn btn-primary">
                                     Login with PSC
                                 </a>
 
