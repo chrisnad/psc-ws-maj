@@ -59,6 +59,7 @@ RUN docker-php-ext-install \
     pdo_mysql \
     exif \
     sockets
+
 # 4.1 install a third-party extension
 RUN pecl install mongodb \
     && docker-php-ext-enable mongodb \
