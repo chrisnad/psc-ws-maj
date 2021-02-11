@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="AppServiceProvider url force scheme to https when not in 'local'">
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="/home to /ui/home">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +200,7 @@
       <workItem from="1610353434454" duration="35912000" />
       <workItem from="1610465630105" duration="181464000" />
       <workItem from="1611842693339" duration="50000" />
-      <workItem from="1611842956459" duration="274262000" />
+      <workItem from="1611842956459" duration="275584000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -482,7 +482,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613038138703</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="/home to /ui/home">
+      <created>1613052129325</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1613052129326</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +543,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added ps edit log for traceability + popup on successful ps edit" />
     <MESSAGE value="moved favicon to public/images and called link from html &lt;head&gt;" />
     <MESSAGE value="obfuscate email and phone number" />
     <MESSAGE value="configure htaccess to export server status to prometheus" />
@@ -561,6 +567,7 @@
     <MESSAGE value="mongodb enable ssl for the &quot;SCRAM-SHA-1&quot; authentication mechanism" />
     <MESSAGE value="- refactored /Ui controllers&#10;- added /ui prefix to web routes" />
     <MESSAGE value="AppServiceProvider url force scheme to https when not in 'local'" />
-    <option name="LAST_COMMIT_MESSAGE" value="AppServiceProvider url force scheme to https when not in 'local'" />
+    <MESSAGE value="/home to /ui/home" />
+    <option name="LAST_COMMIT_MESSAGE" value="/home to /ui/home" />
   </component>
 </project>
