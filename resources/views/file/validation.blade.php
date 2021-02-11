@@ -37,7 +37,7 @@
         if (parseInt(page.value) < parseInt(maxPages.value) - 1) {
             page.value = parseInt(page.value) + 1;
         }
-        $('#page_content').load('/files/validation/' + parseInt(page.value));
+        $('#page_content').load('/ui/files/validation/' + parseInt(page.value));
     }
 
     function dec(element) {
@@ -45,6 +45,6 @@
         if (parseInt(page.value) > 0) {
             page.value = parseInt(page.value) - 1;
         }
-        $('#page_content').load('/files/validation/' + parseInt(page.value));
+        $('#page_content').load('/ui/files/validation/' + parseInt(page.value));
     }
 </script>

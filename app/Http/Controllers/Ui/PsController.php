@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ui;
 
+use App\Http\Controllers\Controller;
 use App\Models\Ps;
 use App\Psc\Transformers\PsTransformer;
 use Illuminate\Contracts\Foundation\Application;

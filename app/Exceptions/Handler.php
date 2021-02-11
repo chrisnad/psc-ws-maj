@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+
 use App\Http\Controllers\Api\ApiResponder;
 use Exception;
 use Illuminate\Auth\AuthenticationException;

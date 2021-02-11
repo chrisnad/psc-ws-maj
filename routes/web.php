@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\FileController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\PsController;
+use App\Http\Controllers\Ui\FileController;
+use App\Http\Controllers\Ui\HomeController;
+use App\Http\Controllers\Ui\WelcomeController;
+use App\Http\Controllers\Ui\PsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,15 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//$proxy_url    = env('PROXY_URL');
-//$proxy_schema = env('PROXY_SCHEMA');
-//
-//if(!empty($proxy_url)) {
-//    url()->forceRootUrl($proxy_url);
-//}
-//if(!empty($proxy_schema)) {
-//    url()->forceScheme($proxy_schema);
-//}
+$proxy_url    = env('PROXY_URL');
+$proxy_schema = env('PROXY_SCHEMA');
+
+if(!empty($proxy_url)) {
+    url()->forceRootUrl($proxy_url);
+}
+if(!empty($proxy_schema)) {
+    url()->forceScheme($proxy_schema);
+}
 
 Route::get('/', [WelcomeController::class, 'index'])
     ->name('welcome');

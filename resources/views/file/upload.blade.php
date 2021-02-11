@@ -42,7 +42,7 @@
         </form>
 
         @isset($message)
-            @component('sub.modal-visible', ['name' => 'info-modal', 'path' => '/files'])
+            @component('sub.modal-visible', ['name' => 'info-modal', 'route' => 'files.index'])
                 <h1>{{ $title }}</h1>
                 <p>{{ $message }}</p>
             @endcomponent
