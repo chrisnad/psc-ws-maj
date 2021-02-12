@@ -21,7 +21,7 @@
     <link href="{{ asset('css/modal.css') }}" rel="stylesheet">
 
     <!-- favicon -->
-    <link rel="icon" href="{{ asset('images/favicon.ico') }}"/>
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon"/>
 
     @stack('extra')
 </head>
