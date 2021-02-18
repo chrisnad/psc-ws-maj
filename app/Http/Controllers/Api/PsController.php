@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Ps;
 
 use Exception;
-use Illuminate\Support\Str;
 
 class PsController extends ApiController
 {
@@ -27,10 +26,9 @@ class PsController extends ApiController
      */
     public function store()
     {
-        $ps = array_filter(request()->all());
-        $ps['nationalId'] = (string) Str::uuid();
-
+        $ps = $this->validatePs();
         Ps::create($ps);
+
         return $this->successResponse(null, 'Creation avec succès');
     }
 
@@ -42,7 +40,7 @@ class PsController extends ApiController
      */
     public function show($id)
     {
-        $ps = $this->getPs($id);
+        $ps = $this->getPsOrFail($id);
         return $this->successResponse($this->psTransformer->transform($ps));
     }
 
@@ -54,7 +52,7 @@ class PsController extends ApiController
      */
     public function update($id)
     {
-        $ps = $this->getPs($id);
+        $ps = $this->getPsOrFail($id);
         $ps->update(array_filter(request()->all()));
         return $this->successResponse(null, 'Mise à jour du Ps avec succès.');
     }
@@ -68,9 +66,56 @@ class PsController extends ApiController
      */
     public function destroy($id)
     {
-        $ps = $this->getPs($id);
+        $ps = $this->getPsOrFail($id);
         $ps->delete();
         return $this->successResponse(null, 'Supression du Ps avec succès.');
+    }
+
+    private function validatePs(): array
+    {
+        $rules = [
+            'nationalId' => 'required|unique:ps',
+            'lastName' => 'nullable|string',
+            'firstName' => 'nullable|string',
+            'dateOfBirth' => 'nullable|string',
+            'birthAddressCode' => 'nullable|string',
+            'birthCountryCode' => 'nullable|string',
+            'birthAddress' => 'nullable|string',
+            'genderCode' => 'nullable|string',
+            'phone' => 'nullable|string',
+            'email' => 'nullable|string',
+            'salutationCode' => 'nullable|string',
+            'professions' => 'nullable|array',
+
+            'professions.*.code' => 'nullable|string',
+            'professions.*.categoryCode' => 'nullable|string',
+            'professions.*.salutationCode' => 'nullable|string',
+            'professions.*.lastName' => 'nullable|string',
+            'professions.*.firstName' => 'nullable|string',
+            'professions.*.expertises' => 'nullable|array',
+            'professions.*.workSituations' => 'nullable|array',
+
+            'professions.*.expertises.*.code' => 'nullable|string',
+            'professions.*.expertises.*.categoryCode' => 'nullable|string',
+
+            'professions.*.workSituations.*.modeCode' => 'nullable|string',
+            'professions.*.workSituations.*.activitySectorCode' => 'nullable|string',
+            'professions.*.workSituations.*.pharmacistTableSectionCode' => 'nullable|string',
+            'professions.*.workSituations.*.roleCode' => 'nullable|string'
+        ];
+
+        $customMessages = [
+            'required' => ':attribute est obligatoir.',
+            'unique' => ':attribute existe déjà.'
+        ];
+
+        $ps = request()->validate($rules, $customMessages);
+
+        foreach ($ps['professions'] as &$profession) {
+            $profession['exProId'] = $profession['code'].$profession['categoryCode'];
+        }
+
+        return $ps;
     }
 
 }

@@ -19,6 +19,14 @@ trait ApiResponder
      * @param string $message
      * @return mixed
      */
+    public function alreadyExistsResponse($message = 'Already exists!'){
+        return $this->errorResponse($message, 409);
+    }
+
+    /**
+     * @param string $message
+     * @return mixed
+     */
     public function internalErrorResponse($message = 'Internal Error!'){
         return $this->errorResponse($message, 500);
     }

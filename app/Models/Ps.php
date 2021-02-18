@@ -30,6 +30,7 @@ class Ps extends Model {
         'phone',
         'email',
         'salutationCode',
+        'professions'
         ];
 
     /**

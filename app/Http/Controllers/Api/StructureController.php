@@ -39,7 +39,7 @@ class StructureController extends ApiController
      */
     public function show($id)
     {
-        $structure = $this->getStructure($id);
+        $structure = $this->getStructureOrFail($id);
         return $this->successResponse($this->structureTransformer->transform($structure));
     }
 
@@ -51,7 +51,7 @@ class StructureController extends ApiController
      */
     public function update($id)
     {
-        $structure = $this->getStructure($id);
+        $structure = $this->getStructureOrFail($id);
         $structure->update(array_filter(request()->all()));
         return $this->successResponse(null, 'Mise à jour de la Structure avec succès.');
     }
@@ -65,7 +65,7 @@ class StructureController extends ApiController
      */
     public function destroy($id)
     {
-        $structure = $this->getStructure($id);
+        $structure = $this->getStructureOrFail($id);
         $structure->delete();
         return $this->successResponse(null, 'Supression de la Structure avec succès.');
     }

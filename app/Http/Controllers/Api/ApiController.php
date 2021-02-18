@@ -61,7 +61,7 @@ class ApiController extends Controller
      * @param $psId
      * @return Ps
      */
-    public function getPs($psId) : Ps
+    public function getPsOrFail($psId) : Ps
     {
         try {
             $ps = Ps::findOrFail($psId);
@@ -76,7 +76,7 @@ class ApiController extends Controller
      * @param $structureId
      * @return Structure
      */
-    public function getStructure($structureId) : Structure
+    public function getStructureOrFail($structureId) : Structure
     {
         try {
             $structure = Structure::findOrFail($structureId);
@@ -92,9 +92,9 @@ class ApiController extends Controller
      * @param $exProId
      * @return mixed
      */
-    public function getExPro($psId, $exProId)
+    public function getExProOrFail($psId, $exProId)
     {
-        $ps = $this->getPs($psId);
+        $ps = $this->getPsOrFail($psId);
         $profession = $ps->professions()->firstWhere('exProId', $exProId);
         if (! $profession) {
             $this->notFoundResponse("Cet exercice professionnel n'exist pas.")->send();
@@ -109,8 +109,8 @@ class ApiController extends Controller
      * @param $situId
      * @return mixed
      */
-    public function getSituation($psId, $exProId, $situId) {
-        $profession = $this->getExPro($psId, $exProId);
+    public function getSituationOrFail($psId, $exProId, $situId) {
+        $profession = $this->getExProOrFail($psId, $exProId);
         $situation = $profession->workSituations()->firstWhere('situId', $situId);
         if (! $situation) {
             $this->notFoundResponse("Cette situation d'exercise n'exist pas.")->send();
@@ -125,8 +125,8 @@ class ApiController extends Controller
      * @param $expertiseId
      * @return mixed
      */
-    public function getExpertise($psId, $exProId, $expertiseId) {
-        $profession = $this->getExPro($psId, $exProId);
+    public function getExpertiseOrFail($psId, $exProId, $expertiseId) {
+        $profession = $this->getExProOrFail($psId, $exProId);
         $situation = $profession->expertises()->firstWhere('expertiseId', $expertiseId);
         if (! $situation) {
             $this->notFoundResponse("Ce savoir fair n'exist pas.")->send();
