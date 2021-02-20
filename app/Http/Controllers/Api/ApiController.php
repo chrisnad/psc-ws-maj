@@ -57,11 +57,18 @@ class ApiController extends Controller
         $this->structureTransformer = new StructureTransformer();
     }
 
+    protected function getNested(array $parent, String $child): array
+    {
+        $nested = isset($parent[$child]) ? $parent[$child] : null;
+        unset($parent[$child]);
+        return ['itself' => $parent, $child => $nested];
+    }
+
     /**
      * @param $psId
      * @return Ps
      */
-    public function getPsOrFail($psId) : Ps
+    protected function getPsOrFail($psId) : Ps
     {
         try {
             $ps = Ps::findOrFail($psId);
@@ -76,7 +83,7 @@ class ApiController extends Controller
      * @param $structureId
      * @return Structure
      */
-    public function getStructureOrFail($structureId) : Structure
+    protected function getStructureOrFail($structureId) : Structure
     {
         try {
             $structure = Structure::findOrFail($structureId);
@@ -92,7 +99,7 @@ class ApiController extends Controller
      * @param $exProId
      * @return mixed
      */
-    public function getExProOrFail($psId, $exProId)
+    protected function getExProOrFail($psId, $exProId)
     {
         $ps = $this->getPsOrFail($psId);
         $profession = $ps->professions()->firstWhere('exProId', $exProId);
@@ -106,30 +113,30 @@ class ApiController extends Controller
     /**
      * @param $psId
      * @param $exProId
-     * @param $situId
+     * @param $expertiseId
      * @return mixed
      */
-    public function getSituationOrFail($psId, $exProId, $situId) {
+    protected function getExpertiseOrFail($psId, $exProId, $expertiseId) {
         $profession = $this->getExProOrFail($psId, $exProId);
-        $situation = $profession->workSituations()->firstWhere('situId', $situId);
-        if (! $situation) {
-            $this->notFoundResponse("Cette situation d'exercise n'exist pas.")->send();
+        $expertise = $profession->expertises()->firstWhere('expertiseId', $expertiseId);
+        if (! $expertise) {
+            $this->notFoundResponse("Ce savoir fair n'exist pas.")->send();
             die();
         }
-        return $situation;
+        return $expertise;
     }
 
     /**
      * @param $psId
      * @param $exProId
-     * @param $expertiseId
+     * @param $situId
      * @return mixed
      */
-    public function getExpertiseOrFail($psId, $exProId, $expertiseId) {
+    protected function getSituationOrFail($psId, $exProId, $situId) {
         $profession = $this->getExProOrFail($psId, $exProId);
-        $situation = $profession->expertises()->firstWhere('expertiseId', $expertiseId);
+        $situation = $profession->workSituations()->firstWhere('situId', $situId);
         if (! $situation) {
-            $this->notFoundResponse("Ce savoir fair n'exist pas.")->send();
+            $this->notFoundResponse("Cette situation d'exercise n'exist pas.")->send();
             die();
         }
         return $situation;
