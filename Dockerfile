@@ -1,7 +1,7 @@
 FROM php:8.0.1-apache-buster
 
-# app version, set with docker build --build-arg version=0.0.2
-ARG version=0.0.4
+# app version, set with docker build --build-arg version=v0.0.2
+ARG version=main
 
 RUN apt-get update
 
@@ -78,8 +78,8 @@ RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser
 RUN mkdir -p /home/devuser/.composer && \
     chown -R devuser:devuser /home/devuser
 
-RUN cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/v$version.tar.gz && \
-    tar -xzf v$version.tar.gz --strip 1 && rm v$version.tar.gz
+RUN cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/$version.tar.gz && \
+    tar -xzf $version.tar.gz --strip 1 && rm $version.tar.gz
 
 # Setup working directory
 WORKDIR /var/www/html
