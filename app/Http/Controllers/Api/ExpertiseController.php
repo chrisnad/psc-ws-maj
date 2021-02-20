@@ -14,7 +14,7 @@ class ExpertiseController extends ApiController
      */
     public function index($psId, $exProId)
     {
-        $profession = $this->getExPro($psId, $exProId);
+        $profession = $this->getExProOrFail($psId, $exProId);
         return $this->successResponse($this->expertiseTransformer->transformCollection(
             $profession->expertises()->toArray()));
     }
@@ -28,7 +28,7 @@ class ExpertiseController extends ApiController
      */
     public function store($psId, $exProId)
     {
-        $profession = $this->getExPro($psId, $exProId);
+        $profession = $this->getExProOrFail($psId, $exProId);
         $expertise = array_filter(request()->all());
 
         $profession->expertises()->create($expertise);
@@ -46,7 +46,7 @@ class ExpertiseController extends ApiController
      */
     public function show($psId, $exProId, $expertiseId)
     {
-        $expertise = $this->getExpertise($psId, $exProId, $expertiseId);
+        $expertise = $this->getExpertiseOrFail($psId, $exProId, $expertiseId);
         return $this->successResponse($this->expertiseTransformer->transform($expertise));
     }
 
@@ -60,7 +60,7 @@ class ExpertiseController extends ApiController
      */
     public function update($psId, $exProId, $expertiseId)
     {
-        $expertise = $this->getExpertise($psId, $exProId, $expertiseId);
+        $expertise = $this->getExpertiseOrFail($psId, $exProId, $expertiseId);
         $updatedExpertise = array_filter(request()->all());
 
         $expertise->update($updatedExpertise, ['upsert' => false]);
@@ -78,7 +78,7 @@ class ExpertiseController extends ApiController
      */
     public function destroy($psId, $exProId, $expertiseId)
     {
-        $expertise = $this->getExpertise($psId, $exProId, $expertiseId);
+        $expertise = $this->getExpertiseOrFail($psId, $exProId, $expertiseId);
 
         $expertise->delete();
         return $this->successResponse(null, "Suppression de l'expertise avec succès.");

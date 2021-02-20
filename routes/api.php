@@ -28,21 +28,6 @@ if(!empty($proxy_schema)) {
     url()->forceScheme($proxy_schema);
 }
 
-//Route::group([
-//
-//    'middleware' => 'api',
-//    'prefix' => 'auth'
-//
-//], function ($router) {
-//
-//    Route::post('login', [AuthController::class, 'login']);
-//    Route::post('register', [AuthController::class, 'register']);
-//    Route::post('logout', [AuthController::class, 'logout']);
-//    Route::post('refresh', [AuthController::class, 'refresh']);
-//    Route::get('user-profile', [AuthController::class, 'userProfile']);
-//
-//});
-
 Route::resource('ps', PsController::class,
     ['only' => ['index', 'store', 'show', 'update', 'destroy']])
     ->names(['index' => 'api.ps.index',
@@ -51,6 +36,7 @@ Route::resource('ps', PsController::class,
         'update' => 'api.ps.update',
         'destroy' => 'api.ps.destroy'
 ]);
+Route::put('ps', [PsController::class, 'storeOrUpdate'])->name('api.ps.storeOrUpdate');
 
 Route::get('ps/{ps}/professions', [ProfessionController::class, 'index']);
 Route::post('ps/{ps}/professions', [ProfessionController::class, 'store']);

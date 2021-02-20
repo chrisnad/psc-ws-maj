@@ -13,7 +13,7 @@ class ProfessionController extends ApiController
      */
     public function index($psId)
     {
-        $ps = $this->getPs($psId);
+        $ps = $this->getPsOrFail($psId);
         return $this->successResponse($this->professionTransformer->transformCollection($ps->professions()->toArray()));
     }
 
@@ -25,7 +25,7 @@ class ProfessionController extends ApiController
      */
     public function store($psId)
     {
-        $ps = $this->getPs($psId);
+        $ps = $this->getPsOrFail($psId);
         $profession = array_filter(request()->all());
         $profession['exProId'] = $profession['code'].$profession['categoryCode'];
 
@@ -42,7 +42,7 @@ class ProfessionController extends ApiController
      */
     public function show($psId, $exProId)
     {
-        $profession = $this->getExPro($psId, $exProId);
+        $profession = $this->getExProOrFail($psId, $exProId);
         return $this->successResponse($this->professionTransformer->transform($profession->toArray()));
     }
 
@@ -55,9 +55,8 @@ class ProfessionController extends ApiController
      */
     public function update($psId, $exProId)
     {
-        $profession = $this->getExPro($psId, $exProId);
+        $profession = $this->getExProOrFail($psId, $exProId);
         $updatedProfession = array_filter(request()->all());
-        $updatedProfession['exProId'] = $updatedProfession['code'].$updatedProfession['categoryCode'];
 
         $profession->update($updatedProfession, ['upsert' => false]);
         return $this->successResponse(null, "Mise à jour de l'exercise pro avec succès.");
@@ -72,7 +71,7 @@ class ProfessionController extends ApiController
      */
     public function destroy($psId, $exProId)
     {
-        $profession = $this->getExPro($psId, $exProId);
+        $profession = $this->getExProOrFail($psId, $exProId);
         $profession->delete();
         return $this->successResponse(null, "Suppression de l'exercise pro avec succès.");
     }

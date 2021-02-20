@@ -14,7 +14,7 @@ class WorkSituationController extends ApiController
      */
     public function index($psId, $exProId)
     {
-        $profession = $this->getExPro($psId, $exProId);
+        $profession = $this->getExProOrFail($psId, $exProId);
         return $this->successResponse($this->situationTransformer->transformCollection(
             $profession->workSituations()->toArray()));
     }
@@ -28,7 +28,7 @@ class WorkSituationController extends ApiController
      */
     public function store($psId, $exProId)
     {
-        $profession = $this->getExPro($psId, $exProId);
+        $profession = $this->getExProOrFail($psId, $exProId);
         $situation = array_filter(request()->all());
 
         $profession->workSituations()->create($situation);
@@ -45,7 +45,7 @@ class WorkSituationController extends ApiController
      */
     public function show($psId, $exProId, $situId)
     {
-        $situation = $this->getSituation($psId, $exProId, $situId);
+        $situation = $this->getSituationOrFail($psId, $exProId, $situId);
         return $this->successResponse($this->situationTransformer->transform($situation->toArray()));
     }
 
@@ -59,7 +59,7 @@ class WorkSituationController extends ApiController
      */
     public function update($psId, $exProId, $situId)
     {
-        $situation = $this->getSituation($psId, $exProId, $situId);
+        $situation = $this->getSituationOrFail($psId, $exProId, $situId);
         $updatedSituation = array_filter(request()->all());
 
         $situation->update($updatedSituation, ['upsert' => false]);
@@ -76,7 +76,7 @@ class WorkSituationController extends ApiController
      */
     public function destroy($psId, $exProId, $situId)
     {
-        $situation = $this->getSituation($psId, $exProId, $situId);
+        $situation = $this->getSituationOrFail($psId, $exProId, $situId);
 
         $situation->delete();
         return $this->successResponse(null, "Suppression de la situation d'exercise avec succès.");
