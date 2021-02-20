@@ -14,3 +14,9 @@ yarn-error.log
 /psc-ws-maj.nomad
 /public/css
 /public/js
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
