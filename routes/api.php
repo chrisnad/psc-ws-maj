@@ -36,25 +36,30 @@ Route::resource('ps', PsController::class,
         'update' => 'api.ps.update',
         'destroy' => 'api.ps.destroy'
 ]);
-Route::put('ps', [PsController::class, 'storeOrUpdate'])->name('api.ps.storeOrUpdate');
+Route::get('ps', [PsController::class, 'index']);
+Route::post('ps', [PsController::class, 'store']);
+Route::put('ps', [PsController::class, 'storeOrUpdate']);
+Route::get('ps/{ps}', [PsController::class, 'show'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::put('ps/{ps}', [PsController::class, 'update'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::delete('ps/{ps}', [PsController::class, 'destroy'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
 
-Route::get('ps/{ps}/professions', [ProfessionController::class, 'index']);
-Route::post('ps/{ps}/professions', [ProfessionController::class, 'store']);
-Route::get('ps/{ps}/professions/{profession}', [ProfessionController::class, 'show']);
-Route::put('ps/{ps}/professions/{profession}', [ProfessionController::class, 'update']);
-Route::delete('ps/{ps}/professions/{profession}', [ProfessionController::class, 'destroy']);
+Route::get('ps/{ps}/professions', [ProfessionController::class, 'index'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::post('ps/{ps}/professions', [ProfessionController::class, 'store'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::get('ps/{ps}/professions/{profession}', [ProfessionController::class, 'show'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::put('ps/{ps}/professions/{profession}', [ProfessionController::class, 'update'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::delete('ps/{ps}/professions/{profession}', [ProfessionController::class, 'destroy'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
 
-Route::get('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'index']);
-Route::post('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'store']);
-Route::get('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'show']);
-Route::put('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'update']);
-Route::delete('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'destroy']);
+Route::get('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'index'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::post('ps/{ps}/professions/{profession}/expertises', [ExpertiseController::class, 'store'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::get('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'show'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::put('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'update'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::delete('ps/{ps}/professions/{profession}/expertises/{expertise}', [ExpertiseController::class, 'destroy'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
 
-Route::get('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'index']);
-Route::post('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'store']);
-Route::get('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'show']);
-Route::put('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'update']);
-Route::delete('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'destroy']);
+Route::get('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'index'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::post('ps/{ps}/professions/{profession}/situations', [WorkSituationController::class, 'store'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::get('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'show'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::put('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'update'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
+Route::delete('ps/{ps}/professions/{profession}/situations/{situation}', [WorkSituationController::class, 'destroy'])->where('ps', '^[0-9]+(\/|[0-9]|\-)[0-9]+$');
 
 Route::resource('structures', StructureController::class,
     ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
