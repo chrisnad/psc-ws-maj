@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="Dockerfile pull code from main branch by default">
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="set route url regex to allow / or - in the middle of nationalId">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ExpertiseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ExpertiseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/WorkSituationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/WorkSituationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Ui/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Ui/PsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Ps.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Ps.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/ps/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +164,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TF_FMT" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../psc-api-maj" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -216,7 +221,9 @@
       <workItem from="1611842956459" duration="297567000" />
       <workItem from="1613465431135" duration="54951000" />
       <workItem from="1614334558317" duration="5000000" />
-      <workItem from="1614703120245" duration="11930000" />
+      <workItem from="1614703120245" duration="26065000" />
+      <workItem from="1616755795233" duration="4316000" />
+      <workItem from="1617282521521" duration="36593000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -540,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613826626101</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="set route url regex to allow / or - in the middle of nationalId">
+      <created>1614849840284</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1614849840284</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +608,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="perform db migrate after build" />
     <MESSAGE value="ok so we're not supposed to do that" />
     <MESSAGE value="catch and redirect to welcome page with error message modal when id not found" />
     <MESSAGE value="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers" />
@@ -619,6 +632,7 @@
     <MESSAGE value="api lets us create new Ps along with its nested entities" />
     <MESSAGE value="api lets us create new Ps along with its nested entities via new put method on Ps" />
     <MESSAGE value="Dockerfile pull code from main branch by default" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dockerfile pull code from main branch by default" />
+    <MESSAGE value="set route url regex to allow / or - in the middle of nationalId" />
+    <option name="LAST_COMMIT_MESSAGE" value="set route url regex to allow / or - in the middle of nationalId" />
   </component>
 </project>

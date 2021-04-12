@@ -3,22 +3,19 @@
 namespace App\Http\Controllers\Ui;
 
 use App\Http\Controllers\Controller;
-use App\Models\Ps;
-use App\Psc\Transformers\PsTransformer;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class PsController extends Controller
 {
 
-    protected $psTransformer;
+    protected $psBaseUrl;
 
     /**
      * Create a new controller instance.
@@ -26,39 +23,8 @@ class PsController extends Controller
      */
     public function __construct()
     {
-        $this->psTransformer = new PsTransformer();
+        $this->psBaseUrl = config("app.api_url").'/ps/';
         $this->middleware('auth');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index(): Response
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create(): Response
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request): Response
-    {
-        //
     }
 
     /**
@@ -73,85 +39,65 @@ class PsController extends Controller
             'id' => 'required'
         ]);
 
-        $id = $request->input('id');
+        $psId = $request->input('id');
+
         // TODO: GET THE ps THE RIGHT WAY
-        try {
-            $ps = Ps::findOrFail($id);
-        } catch(ModelNotFoundException $e) {
+        $response = Http::get($this->psBaseUrl.urlencode($psId));
+        $body = json_decode($response->body(), true);
+
+        if ($response->failed()) {
             return view('welcome', [
                 'title' => 'Erreur',
-                'message' => "Cet identifiant n'existe pas"
+                'message' => $body["message"]
             ]);
         }
 
-        return redirect()->route('ps.show', [
-            'ps' => $ps
-        ]);
-    }
+        $protectedPs = [
+            "nationalId" => $body["data"]["nationalId"],
+            "lastName" => $body["data"]["lastName"],
+            "firstName" => $body["data"]["firstName"],
+            "phone" => $body["data"]["phone"],
+            "email" => $body["data"]["email"]];
 
-    /**
-     * Display the specified resource.
-     *
-     * @param Ps $ps
-     * @return Application|Factory|View
-     */
-    public function show(Ps $ps)
-    {
-        return view('ps.show', ['ps' => $this->psTransformer->transform($ps)]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $ps
-     * @return Application|Factory|View
-     */
-    public function edit(Ps $ps)
-    {
-        return view('ps.edit', [
-            'ps' => $this->psTransformer->transform($ps)
-        ]);
+        return view('ps.show', ['ps' => $protectedPs]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Ps $ps
+     * @param $psId
      * @return array|Application|Factory|View
      */
-    public function update(Ps $ps)
+    public function update($psId)
     {
+        if (! request()->input('phone') and ! request()->input('email')){
+            return view('welcome', [
+                'title' => 'Info',
+                'message' => "Aucune mise à jour n'a été éffectuée"
+            ]);
+        }
+
         request()->validate([
             'conditions' => 'accepted'
         ]);
 
-        if (! request()->input('phone') and ! request()->input('email')){
+        // TODO: this updates in our database, adapt for WS
+        $response = Http::put($this->psBaseUrl.urlencode($psId), array_filter(request()->all()));
+        $body = json_decode($response->body(), true);
+
+        if ($response->failed()) {
             return view('welcome', [
-                'title' => 'Info',
-                'message' => "Aucun changement n'a été éffectué"
+                'title' => 'Erreur',
+                'message' => $body["message"]
             ]);
         }
 
-        // TODO: this updates in our database, adapt for WS
-        $ps->update(array_filter(request()->all()));
-
-        Log::info("authenticated_user=".Auth::user()->preferred_username." modified_user=".$ps->nationalId);
+        Log::info("authenticated_user=".Auth::user()->preferred_username." modified_user=".$psId);
 
         return view('welcome', [
             'title' => 'Succès',
-            'message' => 'Les modifications on bien été pris en compte'
+            'message' => 'Les modifications on bien été prises en compte'
         ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Ps $ps
-     * @return Response
-     */
-    public function destroy(Ps $ps): Response
-    {
-        //
     }
 
 }

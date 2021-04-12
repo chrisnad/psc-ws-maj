@@ -32,7 +32,7 @@ class PsController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Store or Update the specified resource in storage.
      *
      * @return mixed
      */

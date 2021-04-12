@@ -56,15 +56,15 @@ class Handler extends ExceptionHandler
 
     public function handleException($request, Exception $exception)
     {
-        if ($exception instanceof MethodNotAllowedHttpException) {
+        /*if ($exception instanceof MethodNotAllowedHttpException) {
             return $this->errorResponse('The specified method for the request is invalid', 405);
         }
 
         if ($exception instanceof AuthenticationException) {
             return redirect($exception->redirectTo());
-        }
+        }*/
 
-        if ($exception instanceof NotFoundHttpException) {
+        /*if ($exception instanceof NotFoundHttpException) {
             return $this->notFoundResponse('The specified URL cannot be found');
         }
 
@@ -80,7 +80,7 @@ class Handler extends ExceptionHandler
                 ]));
             }
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
-        }
+        }*/
 
 //        if (config('app.debug')) {
 //            return parent::render($request, $exception);

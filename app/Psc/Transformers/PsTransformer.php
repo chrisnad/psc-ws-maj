@@ -29,7 +29,9 @@ class PsTransformer extends Transformer {
      */
     public function transform($ps)
     {
+        dd($ps);
         $protectedPs = $ps->toArray();
+        dd($ps, $protectedPs);
         $protectedPs['phone'] = $this->hidePhone(isset($ps['phone']) ? $ps['phone'] : "");
         $protectedPs['email'] = $this->hideEmail(isset($ps['email']) ? $ps['email'] : "");
         if (isset($ps['professions'])) {

@@ -58,6 +58,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'api_url' => env('API_URL', 'http://localhost:9000/api/'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
