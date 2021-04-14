@@ -16,14 +16,7 @@
 
         <div class="table-responsive" id="page_content">
             <!-- this part will change -->
-            <table class="table table-hover table-condensed table-bordered table-sm">
-                @for ($i = 0; $i < $colNum; $i++)
-                    <tr>
-                        <th>{{ $headers[$i] }}</th>
-                        <td>{{ $data[$page][$i] }}</td>
-                    </tr>
-                @endfor
-            </table>
+            @include('file.page')
         </div>
 
     @endcomponent

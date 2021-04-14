@@ -8,7 +8,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -92,7 +91,7 @@ class PsController extends Controller
             ]);
         }
 
-        Log::info("authenticated_user=".Auth::user()->preferred_username." modified_user=".$psId);
+        Log::info("authenticated_user=".session('preferred_username')." modified_user=".$psId);
 
         return view('welcome', [
             'title' => 'Succès',

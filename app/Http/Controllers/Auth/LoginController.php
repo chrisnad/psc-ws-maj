@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -75,25 +73,29 @@ class LoginController extends Controller
 
     public function handleProviderCallback($provider): RedirectResponse
     {
-        $providerUser = Socialite::driver($provider)->user();
-        //$providerUser = Socialite::driver($provider)->stateless()->user();
+        $providerUser = Socialite::driver($provider)->stateless()->user();
 
-        // Get user from DB or create if provider id is new
-        $user = User::firstOrCreate(
-            [
-                'provider'    => $provider,
-                'provider_id' => $providerUser->getId(),
-            ],
-            [
-                'name'  => $providerUser->getName(),
-                'last_name' => Arr::get($providerUser->user, 'family_name'),
-                'preferred_username' => Arr::get($providerUser->user, 'preferred_username'),
-            ]
-        );
+        $jwt = $providerUser->token;
+        $refreshToken = $providerUser->refreshToken;
+        $expiresIn = $providerUser->expiresIn;
 
-        // Login the user
-        Auth::login($user, true);
-        // JWTAuth::fromUser($user);
+        list($header, $payload, $signature) = explode('.', $jwt);
+        $payload_to_verify = utf8_decode($header . '.' . $payload);
+        $decodedSignature = base64_decode(strtr($signature, '-_', '+/'));
+
+        $publicKey = config('auth.public_key');
+
+        $verified = openssl_verify($payload_to_verify, $decodedSignature, $publicKey, OPENSSL_ALGO_SHA256) == 1;
+        $authTime = json_decode(base64_decode($payload), true)['auth_time'];
+        $timeElapsed = date_timestamp_get(date_create()) - $authTime;
+
+        session()->put([
+            'token' => $jwt,
+            'user_name' => $providerUser->getName(),
+            'preferred_username' => Arr::get($providerUser->user, 'preferred_username'),
+            'authenticated' => $verified,
+            'time_elapsed' => $timeElapsed
+        ]);
 
         // Redirect to welcome page
         return redirect()->route('welcome');

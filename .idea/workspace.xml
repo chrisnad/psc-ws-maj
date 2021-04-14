@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="set route url regex to allow / or - in the middle of nationalId">
+    <list default="true" id="01f0d080-abd7-4847-be8f-26eb40988962" name="Default Changelist" comment="- removed /api&#10;- simplified /web and psController. Now communicates with backend api only.&#10;- some changes to web calls&#10;&#10;- next : major cleanup">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/psc-ws-maj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/psc-ws-maj.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiResponder.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ExpertiseController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ProfessionController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/StructureController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/WorkSituationController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Ui/FileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Ui/FileController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Ui/PsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Ui/PsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Ps.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Ps.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Psc/Transformers/PsTransformer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Expertise.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/FileData.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/FileData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Profession.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Ps.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Structure.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/WorkSituation.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ps/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ps/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_12_161917_create_ps_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_01_163512_create_structure_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/file/upload.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/file/upload.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/file/validation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/file/validation.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/sub/card-header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/sub/card-header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +51,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,7 +121,6 @@
       <path value="$PROJECT_DIR$/vendor/brick/math" />
       <path value="$PROJECT_DIR$/vendor/league/flysystem" />
       <path value="$PROJECT_DIR$/vendor/league/commonmark" />
-      <path value="$PROJECT_DIR$/vendor/jean85/pretty-package-versions" />
       <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
       <path value="$PROJECT_DIR$/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
@@ -109,7 +139,6 @@
       <path value="$PROJECT_DIR$/vendor/socialiteproviders/manager" />
       <path value="$PROJECT_DIR$/vendor/socialiteproviders/keycloak" />
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
-      <path value="$PROJECT_DIR$/vendor/jenssegers/mongodb" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
@@ -132,7 +161,6 @@
       <path value="$PROJECT_DIR$/vendor/fruitcake/laravel-cors" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
-      <path value="$PROJECT_DIR$/vendor/mongodb/mongodb" />
       <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
       <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
       <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
@@ -167,7 +195,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../psc-api-maj" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -223,7 +251,10 @@
       <workItem from="1614334558317" duration="5000000" />
       <workItem from="1614703120245" duration="26065000" />
       <workItem from="1616755795233" duration="4316000" />
-      <workItem from="1617282521521" duration="36593000" />
+      <workItem from="1617282521521" duration="40642000" />
+      <workItem from="1618231306588" duration="148000" />
+      <workItem from="1618231594236" duration="33520000" />
+      <workItem from="1618403973941" duration="9643000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1610466168392</created>
@@ -554,7 +585,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614849840284</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="- removed /api&#10;- simplified /web and psController. Now communicates with backend api only.&#10;- some changes to web calls&#10;&#10;- next : major cleanup">
+      <created>1618222591031</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1618222591031</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +646,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ok so we're not supposed to do that" />
     <MESSAGE value="catch and redirect to welcome page with error message modal when id not found" />
     <MESSAGE value="implemented mongodb and migrated to new db for whole app&#10;added routes for embedded Profession model (profession is nested in ps)&#10;added models for the rest of it but still needs routes and controllers" />
     <MESSAGE value="added nested profession update" />
@@ -633,6 +670,7 @@
     <MESSAGE value="api lets us create new Ps along with its nested entities via new put method on Ps" />
     <MESSAGE value="Dockerfile pull code from main branch by default" />
     <MESSAGE value="set route url regex to allow / or - in the middle of nationalId" />
-    <option name="LAST_COMMIT_MESSAGE" value="set route url regex to allow / or - in the middle of nationalId" />
+    <MESSAGE value="- removed /api&#10;- simplified /web and psController. Now communicates with backend api only.&#10;- some changes to web calls&#10;&#10;- next : major cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="- removed /api&#10;- simplified /web and psController. Now communicates with backend api only.&#10;- some changes to web calls&#10;&#10;- next : major cleanup" />
   </component>
 </project>

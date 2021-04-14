@@ -4,15 +4,14 @@
  */
 namespace App\Models;
 
-
-use Jenssegers\Mongodb\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * FileData
  */
 class FileData extends Model {
 
-    protected $connection = 'mongodb';
+    protected $connection = 'sqlite';
 
     protected $fillable = [
         'data'

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Jenssegers\Mongodb\Schema\Blueprint;
 
 class CreateUsersTable extends Migration
 {
@@ -15,9 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $collection) {
             $collection->string('name');
-            $collection->string('email')->nullable();
-            $collection->timestamp('email_verified_at')->nullable();
-            $collection->string('password')->nullable();
             $collection->rememberToken();
             $collection->timestamps();
 

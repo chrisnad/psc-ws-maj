@@ -20,6 +20,8 @@ class FileController extends Controller
 
     protected $VALID_COLUMN_NUMBER = 50;
 
+    protected $DATA;
+
     protected $QUEUE = 'file.upload';
 
     protected $HEADER = [
@@ -114,11 +116,10 @@ class FileController extends Controller
         $file = $request->file('file');
         $separator = $request->input('separator', '|');
 
-        $data = $this->csvToArray($file, $separator);
+        $fileData = $this->csvToArray($file, $separator);
 
-        if ($data) {
-            Auth::user()->fileData()->updateOrCreate([], ['data' => $data]);
-            return redirect()->route('files.validation')->withInput(['page' => 0]);
+        if ($fileData) {
+            return redirect()->route('files.validation')->with('file-data', $fileData);
         } else {
             return view('file.upload', [
                 'title' => 'Erreur',
@@ -128,18 +129,14 @@ class FileController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return mixed
      */
-    public function validation(Request $request)
+    public function validation()
     {
-        $data = Auth::user()->fileData->data;
-
-        $page = $request->input('page') ? $request->input('page') : 0;
+        $fileData = session('file-data');
 
         return view('file.validation', [
-            'page' => $page,
-            'data' => $data,
+            'data' => $fileData[0],
             'headers' => $this->HEADER,
             'colNum' => $this->VALID_COLUMN_NUMBER
         ]);
@@ -151,10 +148,10 @@ class FileController extends Controller
      */
     public function getPage($page)
     {
-        $data = Auth::user()->fileData->data;
+        $fileData = session('file-data');
 
         return view('file.page', [
-            'data' => $data[$page],
+            'data' => $fileData[$page],
             'headers' => $this->HEADER,
             'colNum' => $this->VALID_COLUMN_NUMBER
         ]);

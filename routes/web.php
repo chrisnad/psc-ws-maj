@@ -31,8 +31,6 @@ if(!empty($proxy_schema)) {
 Route::get('/', [WelcomeController::class, 'index'])
     ->name('welcome');
 
-//Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
 Route::post('/logout', [LoginController::class, 'logout'])

@@ -1,4 +1,4 @@
-FROM php:8.0.1-apache-buster
+FROM php:apache-buster
 
 # app version, set with docker build --build-arg version=v0.0.2
 ARG version=main
@@ -59,11 +59,6 @@ RUN docker-php-ext-install \
     pdo_mysql \
     exif \
     sockets
-
-# 4.1 install a third-party extension
-RUN pecl install mongodb \
-    && docker-php-ext-enable mongodb \
-    && echo "extension=mongodb.so" >> "$PHP_INI_DIR/php.ini"
 
 # 5. composer
 ENV COMPOSER_HOME /composer
