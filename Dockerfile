@@ -8,13 +8,10 @@ RUN apt-get update
 # 1. development packages
 RUN apt-get install -y \
     git \
-    zip \
     pkg-config \
     libcurl4-openssl-dev \
     curl \
     wget \
-    sudo \
-    unzip \
     libicu-dev \
     libbz2-dev \
     libpng-dev \
@@ -56,9 +53,14 @@ RUN a2enmod rewrite headers
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN docker-php-ext-install \
-    pdo_mysql \
     exif \
     sockets
+
+# 4.1 install a third-party extension
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb \
+    && echo "extension=mongodb.so" >> "$PHP_INI_DIR/php.ini"
+
 
 # 5. composer
 ENV COMPOSER_HOME /composer
