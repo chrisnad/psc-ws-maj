@@ -1,4 +1,4 @@
-@if (Auth::user())
+@if (session('authenticated'))
     <div class="card-header font-weight-bold text-white bg-primary">
         {{ $title }}
         <img src="{{ asset('images/authenticated-user-2.png') }}"

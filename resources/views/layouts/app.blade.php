@@ -50,16 +50,10 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
-                            @if (Auth::guest())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('auth.redirect', 'prosanteconnect') }}">{{ __('Se connecter') }}</a>
-                                </li>
-                            @endif
-                        @else
+                        @if (session('authenticated'))
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ session('user_name') }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -74,7 +68,11 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('auth.redirect', 'prosanteconnect') }}">{{ __('Se connecter') }}</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

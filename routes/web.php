@@ -31,22 +31,17 @@ if(!empty($proxy_schema)) {
 Route::get('/', [WelcomeController::class, 'index'])
     ->name('welcome');
 
-//Auth::routes();
-
 Route::get('/home', [HomeController::class, 'index'])
     ->name('home');
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
+$nationalIdRegex = '^[0-9]+(\/|[0-9]|\-)[0-9]+$';
 
 Route::get('/ps', [PsController::class, 'getById'])
     ->name('ps.getById');
-Route::get('/ps/{ps}', [PsController::class, 'show'])
-    ->name('ps.show');
-Route::put('/ps/{ps}', [PsController::class, 'update'])
-    ->name('ps.update');
-Route::get('/ps/{ps}/edit', [PsController::class, 'edit'])
-    ->name('ps.edit');
+Route::put('/ps/{psId}', [PsController::class, 'update'])
+    ->name('ps.update')->where('psId', $nationalIdRegex);
 
 Route::get('/files', [FileController::class, 'index'])
     ->name('files.index');

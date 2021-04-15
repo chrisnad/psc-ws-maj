@@ -4,8 +4,8 @@
 
     @component('sub.card', ['title' => 'Recherche par identifiant'])
 
-        @if (Auth::user())
-            <p>{{ __("Bonjour ") }} {{Auth::user()->name}}</p>
+        @if (session('authenticated'))
+            <p>{{ __("Bonjour ") }} {{session('user_name')}}</p>
         @else
             <p>{{ __("Bonjour, authentifiez-vous pour avoir accès au service") }}</p>
         @endif

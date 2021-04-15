@@ -1,4 +1,4 @@
-FROM php:8.0.1-apache-buster
+FROM php:apache-buster
 
 # app version, set with docker build --build-arg version=v0.0.2
 ARG version=main
@@ -8,13 +8,10 @@ RUN apt-get update
 # 1. development packages
 RUN apt-get install -y \
     git \
-    zip \
     pkg-config \
     libcurl4-openssl-dev \
     curl \
     wget \
-    sudo \
-    unzip \
     libicu-dev \
     libbz2-dev \
     libpng-dev \
@@ -56,7 +53,6 @@ RUN a2enmod rewrite headers
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN docker-php-ext-install \
-    pdo_mysql \
     exif \
     sockets
 
@@ -64,6 +60,7 @@ RUN docker-php-ext-install \
 RUN pecl install mongodb \
     && docker-php-ext-enable mongodb \
     && echo "extension=mongodb.so" >> "$PHP_INI_DIR/php.ini"
+
 
 # 5. composer
 ENV COMPOSER_HOME /composer
@@ -88,7 +85,7 @@ WORKDIR /var/www/html
 RUN composer install --optimize-autoloader --no-dev
 RUN npm install
 
-RUN php artisan route:cache && php artisan view:cache
+RUN php artisan route:cache && php artisan view:cache && php artisan config:cache
 RUN composer dump-autoload
 
 # Npm run

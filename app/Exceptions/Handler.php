@@ -3,21 +3,12 @@
 namespace App\Exceptions;
 
 
-use App\Http\Controllers\Api\ApiResponder;
 use Exception;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Session\TokenMismatchException;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
-
-    use ApiResponder;
 
     /**
      * A list of the exception types that are not reported.
@@ -45,9 +36,9 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->renderable(function(Exception $e, $request) {
+        /*$this->renderable(function(Exception $e, $request) {
             return $this->handleException($request, $e);
-        });
+        });*/
 
         $this->reportable(function (Throwable $e) {
             //
@@ -56,7 +47,7 @@ class Handler extends ExceptionHandler
 
     public function handleException($request, Exception $exception)
     {
-        if ($exception instanceof MethodNotAllowedHttpException) {
+        /*if ($exception instanceof MethodNotAllowedHttpException) {
             return $this->errorResponse('The specified method for the request is invalid', 405);
         }
 
@@ -80,7 +71,7 @@ class Handler extends ExceptionHandler
                 ]));
             }
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
-        }
+        }*/
 
 //        if (config('app.debug')) {
 //            return parent::render($request, $exception);

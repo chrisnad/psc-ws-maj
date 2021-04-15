@@ -13,13 +13,13 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "jenssegers/mongodb": "^3.8",
         "laravel/framework": "^8.12",
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "laravelcollective/html": "^6.2",
-        "socialiteproviders/keycloak": "^4.1"
+        "socialiteproviders/keycloak": "^4.1",
+      "ext-openssl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

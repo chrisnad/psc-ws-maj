@@ -13,15 +13,6 @@
 
     @component('sub.card', ['title' => 'Dépot du fichier'])
 
-{{--        <form method="post" action="{{ route('files.upload') }}" enctype="multipart/form-data"--}}
-{{--              class="dropzone" id="dropzone">--}}
-{{--            @csrf--}}
-{{--            <label>--}}
-{{--                <input name='separator' type="text">--}}
-{{--            </label>--}}
-{{--            <button type="submit" id="submit-dropzone" class="btn btn-default btn-outline-primary">Submit</button>--}}
-{{--        </form>--}}
-
         <form method="post" action="{{ route('files.upload') }}" enctype="multipart/form-data">
             @csrf
             <div class="col text-center input-group">
