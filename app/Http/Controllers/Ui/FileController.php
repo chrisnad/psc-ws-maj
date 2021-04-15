@@ -9,7 +9,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 /**
  * Class FileController
@@ -93,15 +92,6 @@ class FileController extends Controller
         return view('file.upload');
     }
 
-    public function publish() {
-        $data = Auth::user()->fileData->data;
-        $this->sendRows($data);
-        return view('file.upload', [
-            'title' => 'Success',
-            'message' => 'Le fichier a été envoyé pour le traitement'
-        ]);
-    }
-
     /**
      * @param Request $request
      * @return mixed
@@ -119,7 +109,13 @@ class FileController extends Controller
         $fileData = $this->csvToArray($file, $separator);
 
         if ($fileData) {
-            return redirect()->route('files.validation')->with('file-data', $fileData);
+            // return redirect()->route('files.validation');
+            return view('file.validation', [
+                'data' => $fileData[0],
+                'page' => 0,
+                'headers' => $this->HEADER,
+                'colNum' => $this->VALID_COLUMN_NUMBER
+            ]);
         } else {
             return view('file.upload', [
                 'title' => 'Erreur',
@@ -154,6 +150,19 @@ class FileController extends Controller
             'data' => $fileData[$page],
             'headers' => $this->HEADER,
             'colNum' => $this->VALID_COLUMN_NUMBER
+        ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function publish() {
+        $fileData = session('file-data');
+
+        $this->sendRows($fileData);
+        return view('file.upload', [
+            'title' => 'Success',
+            'message' => 'Le fichier a été envoyé pour le traitement'
         ]);
     }
 
