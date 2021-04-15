@@ -85,7 +85,7 @@ WORKDIR /var/www/html
 RUN composer install --optimize-autoloader --no-dev
 RUN npm install
 
-RUN php artisan route:cache && php artisan view:cache
+RUN php artisan route:cache && php artisan view:cache && php artisan config:cache
 RUN composer dump-autoload
 
 # Npm run
