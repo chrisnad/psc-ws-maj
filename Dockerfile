@@ -37,9 +37,7 @@ RUN . $NVM_DIR/nvm.sh \
 # add node and npm to path so the commands are available
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-# confirm installation
-RUN node -v
-RUN npm -v
+
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
@@ -56,11 +54,6 @@ RUN docker-php-ext-install \
     exif \
     sockets
 
-# 4.1 install a third-party extension
-RUN pecl install mongodb \
-    && docker-php-ext-enable mongodb \
-    && echo "extension=mongodb.so" >> "$PHP_INI_DIR/php.ini"
-
 
 # 5. composer
 ENV COMPOSER_HOME /composer
@@ -75,8 +68,8 @@ RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser
 RUN mkdir -p /home/devuser/.composer && \
     chown -R devuser:devuser /home/devuser
 
-RUN cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/$version.tar.gz && \
-    tar -xzf $version.tar.gz --strip 1 && rm $version.tar.gz
+RUN cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/$version.tar.gz \
+    && tar -xzf $version.tar.gz --strip 1 && rm $version.tar.gz
 
 # Setup working directory
 WORKDIR /var/www/html
@@ -85,7 +78,9 @@ WORKDIR /var/www/html
 RUN composer install --optimize-autoloader --no-dev
 RUN npm install
 
-RUN php artisan route:cache && php artisan view:cache && php artisan config:cache
+RUN touch /var/www/html/.env && echo "APP_KEY=" > .env && php artisan key:generate \
+    && php artisan route:cache && php artisan view:cache && php artisan config:cache
+
 RUN composer dump-autoload
 
 # Npm run

@@ -13,7 +13,15 @@
 
     @component('sub.card', ['title' => 'Dépot du fichier'])
 
-        <form method="post" action="{{ route('files.upload') }}" enctype="multipart/form-data">
+        <input id="file-select" type="file" onchange="readFile()" name="files[]">
+
+        <div class="table-responsive" id="page_content">
+            <!-- this part will change -->
+            @include('file.page')
+        </div>
+
+
+<!--        <form method="post" action="{{ route('files.upload') }}" enctype="multipart/form-data">
             @csrf
             <div class="col text-center input-group">
                 <input name='file' type='file' required>
@@ -30,7 +38,7 @@
             <div class="col text-center form-group pt-5">
                 <button type="submit" class="btn btn-default btn-outline-primary">Charger le fichier</button>
             </div>
-        </form>
+        </form>-->
 
         @isset($message)
             @component('sub.modal-visible', ['name' => 'info-modal', 'route' => 'files.index'])
@@ -42,3 +50,34 @@
     @endcomponent
 
 @endsection
+
+<script type="text/javascript">
+
+    function readFile() {
+        const fileSelected = $('#file-select');
+        loadAsText(fileSelected[0].files[0]);
+    }
+
+    function loadCsvFile(){
+        readFile()
+    }
+
+    function loadAsText(file) {
+        const reader = new FileReader();
+        reader.readAsText(file);
+
+        reader.addEventListener('load', (event) => {
+            const result = event.target.result;
+            console.log(result);
+            // Do something with result
+        });
+/*
+        reader.addEventListener('progress', (event) => {
+            if (event.loaded && event.total) {
+                const percent = (event.loaded / event.total) * 100;
+                console.log(`Progress: ${Math.round(percent)}`);
+            }
+        });*/
+    }
+
+</script>
