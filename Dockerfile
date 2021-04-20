@@ -40,19 +40,16 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # 2. apache configs + document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-RUN sed -i 's/Require local/#Require local/g' /etc/apache2/mods-available/status.conf
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
+    sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf && \
+    sed -i 's/Require local/#Require local/g' /etc/apache2/mods-available/status.conf
 
 # 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
 RUN a2enmod rewrite headers
 
 # 4. start with base php config, then add extensions
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-
-RUN docker-php-ext-install \
-    exif \
-    sockets
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" && \
+    docker-php-ext-install exif sockets
 
 
 # 5. composer
@@ -64,24 +61,20 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 # so when we execute CLI commands, all the host file's ownership remains intact
 # otherwise command from inside container will create root-owned files and directories
 ARG uid
-RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser
-RUN mkdir -p /home/devuser/.composer && \
-    chown -R devuser:devuser /home/devuser
-
-RUN cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/$version.tar.gz \
-    && tar -xzf $version.tar.gz --strip 1 && rm $version.tar.gz
+RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser && \
+    mkdir -p /home/devuser/.composer && \
+    chown -R devuser:devuser /home/devuser && \
+    cd /var/www/html && wget https://github.com/prosanteconnect/psc-ws-maj/archive/$version.tar.gz && \
+    tar -xzf $version.tar.gz --strip 1 && rm $version.tar.gz
 
 # Setup working directory
 WORKDIR /var/www/html
 
-# Install dependencies
-RUN composer install --optimize-autoloader --no-dev
-RUN npm install
-
-RUN touch /var/www/html/.env && echo "APP_KEY=" > .env && php artisan key:generate \
-    && php artisan route:cache && php artisan view:cache && php artisan config:cache
-
-RUN composer dump-autoload
-
-# Npm run
-RUN npm run production
+# Install dependencies, run npm, patch apache start script to reload php config
+RUN composer install --optimize-autoloader --no-dev && \
+    npm install && \
+    touch /var/www/html/.env && echo "APP_KEY=" > .env && php artisan key:generate && \
+    php artisan route:cache && php artisan view:cache && php artisan config:cache && \
+    composer dump-autoload && \
+    npm run production && \
+    sed -i '/^exec.*/i php artisan config:cache' /usr/local/bin/apache2-foreground
