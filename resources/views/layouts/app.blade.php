@@ -29,13 +29,15 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand font-weight-bold" href="{{ route('welcome') }}">
-                    <span style="color:rgb(27,113,184);">Pro Santé </span>
-                    <span style="color:rgb(214,10,82);">Connect</span>
-                </a>
-                <a class="navbar-brand font-weight-bold" href="{{ route('files.index') }}">
-                    <span style="color:rgb(27,113,184);">- Files</span>
-                </a>
+                <div>
+                    <a class="navbar-brand font-weight-bold" href="{{ route('welcome') }}">
+                        <span style="color:rgb(27,113,184);">Pro Santé </span>
+                        <span style="color:rgb(214,10,82);">Connect</span>
+                    </a>
+                    <a class="navbar-brand font-weight-bold" href="{{ route('files.index') }}">
+                        <span style="color:rgb(27,113,184);">- Files</span>
+                    </a>
+                </div>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

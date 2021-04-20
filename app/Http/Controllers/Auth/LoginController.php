@@ -73,11 +73,11 @@ class LoginController extends Controller
 
     public function handleProviderCallback($provider): RedirectResponse
     {
-        $providerUser = Socialite::driver($provider)->stateless()->user();
+        $providerUser = Socialite::driver($provider)->user();
 
         $jwt = $providerUser->token;
-        $refreshToken = $providerUser->refreshToken;
-        $expiresIn = $providerUser->expiresIn;
+//        $refreshToken = $providerUser->refreshToken;
+//        $expiresIn = $providerUser->expiresIn;
 
         list($header, $payload, $signature) = explode('.', $jwt);
         $payload_to_verify = utf8_decode($header . '.' . $payload);
