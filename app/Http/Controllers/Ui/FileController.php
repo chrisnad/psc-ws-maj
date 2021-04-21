@@ -89,7 +89,10 @@ class FileController extends Controller
      * @return Application|Factory|View
      */
     public function index() {
-        return view('file.upload');
+        return view('file.upload', [
+            'headers' => $this->HEADER,
+            'colNum' => $this->VALID_COLUMN_NUMBER
+        ]);
     }
 
     /**
