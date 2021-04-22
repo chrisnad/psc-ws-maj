@@ -83,7 +83,8 @@ class LoginController extends Controller
         $payload_to_verify = utf8_decode($header . '.' . $payload);
         $decodedSignature = base64_decode(strtr($signature, '-_', '+/'));
 
-        $publicKey = config('auth.public_key');
+        $publicKeyFile = config('auth.public_key_file');
+        $publicKey = file_get_contents($publicKeyFile);
 
         $verified = openssl_verify($payload_to_verify, $decodedSignature, $publicKey, OPENSSL_ALGO_SHA256) == 1;
         $authTime = json_decode(base64_decode($payload), true)['auth_time'];
