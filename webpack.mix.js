@@ -16,6 +16,3 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.css('resources/css/modal.css', 'public/css');
-
-mix.js('resources/js/dropzone.js', 'public/js')
-    .css('resources/css/dropzone.css', 'public/css');
