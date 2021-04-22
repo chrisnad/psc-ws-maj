@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'public_key' => env('PUBLIC_KEY'),
+    'public_key_file' => env('PUBLIC_KEY_FILE'),
 
     /*
     |--------------------------------------------------------------------------
