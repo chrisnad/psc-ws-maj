@@ -47,12 +47,6 @@ Route::get('/files', [FileController::class, 'index'])
     ->name('files.index');
 Route::post('/files', [FileController::class, 'upload'])
     ->name('files.upload');
-Route::get('/files/validation', [FileController::class, 'validation'])
-    ->name('files.validation');
-Route::get('/files/validation/{page}', [FileController::class, 'getPage']);
-
-Route::get('/files/publish', [FileController::class, 'publish'])
-    ->name('files.publish');
 
 Route::get('/auth/{provider}/redirect', [LoginController::class, 'redirectToProvider'])
     ->name('auth.redirect');

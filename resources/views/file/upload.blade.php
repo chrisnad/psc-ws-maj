@@ -11,8 +11,8 @@
             <div class="col text-center input-group">
                 <input id="file-select" type="file" onchange="readFile()" name="files[]" required>
                 <input type="hidden" name="MAX_FILE_SIZE" value="4194304">
-                <p class="text-danger">{{ $errors->first('file') }}</p>
             </div>
+            <p class="text-danger">{{ $errors->first('file') }}</p>
             <div class="col text-center input-group pt-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroup-sizing-sm">Separateur</span>
@@ -89,8 +89,7 @@
     }
 
     function setAttrInTable(validationTable, colNum, line, i) {
-        if (i > colNum) {
-            console.log(i);
+        if (i >= colNum || validationTable.rows[i]===undefined) {
             return;
         }
         validationTable.rows[i].cells[1].innerHTML = line[i];

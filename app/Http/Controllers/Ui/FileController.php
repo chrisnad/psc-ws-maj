@@ -91,7 +91,7 @@ class FileController extends Controller
     public function index() {
         return view('file.upload', [
             'headers' => $this->HEADER,
-            'colNum' => $this->VALID_COLUMN_NUMBER
+            'colNum' => $this->VALID_COLUMN_NUMBER-1
         ]);
     }
 
@@ -102,71 +102,31 @@ class FileController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'file' => 'required',
+            'files' => 'required',
             'separator' => 'required'
         ]);
 
-        $file = $request->file('file');
+        $file = $request->file('files')[0];
         $separator = $request->input('separator', '|');
 
         $fileData = $this->csvToArray($file, $separator);
 
         if ($fileData) {
-            // return redirect()->route('files.validation');
-            return view('file.validation', [
-                'data' => $fileData[0],
-                'page' => 0,
+            $this->publishFile($fileData);
+            return view('file.upload', [
                 'headers' => $this->HEADER,
-                'colNum' => $this->VALID_COLUMN_NUMBER
+                'colNum' => $this->VALID_COLUMN_NUMBER-1,
+                'title' => 'Success',
+                'message' => 'Le fichier a été envoyé pour le traitement'
             ]);
         } else {
             return view('file.upload', [
+                'headers' => $this->HEADER,
+                'colNum' => $this->VALID_COLUMN_NUMBER-1,
                 'title' => 'Erreur',
-                'message' => "Le fichier n'est pas au bon format csv"
+                'message' => "Le fichier chargé n'est pas au bon format"
             ]);
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function validation()
-    {
-        $fileData = session('file-data');
-
-        return view('file.validation', [
-            'data' => $fileData[0],
-            'headers' => $this->HEADER,
-            'colNum' => $this->VALID_COLUMN_NUMBER
-        ]);
-    }
-
-    /**
-     * @param $page
-     * @return mixed
-     */
-    public function getPage($page)
-    {
-        $fileData = session('file-data');
-
-        return view('file.page', [
-            'data' => $fileData[$page],
-            'headers' => $this->HEADER,
-            'colNum' => $this->VALID_COLUMN_NUMBER
-        ]);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function publish() {
-        $fileData = session('file-data');
-
-        $this->sendRows($fileData);
-        return view('file.upload', [
-            'title' => 'Success',
-            'message' => 'Le fichier a été envoyé pour le traitement'
-        ]);
     }
 
     private function csvToArray($filename='', $delimiter=',')
@@ -201,21 +161,21 @@ class FileController extends Controller
     /**
      * @param $data
      */
-    private function sendRows($data): void
+    private function publishFile($data): void
     {
         foreach ($data as $row) {
             $message = $row[0];
             foreach (array_slice($row,1) as $attribute) {
                 $message = $message . "|" . $attribute;
             }
-            $this->send($message);
+            $this->publishRow($message);
         }
     }
 
     /**
      * @param $message
      */
-    private function send($message) {
+    private function publishRow($message) {
         try {
             (new Amqp)->publish($this->QUEUE, $message, ['queue' => $this->QUEUE]);
         } catch (Exception $exception) {
