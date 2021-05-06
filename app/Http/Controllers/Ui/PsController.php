@@ -43,11 +43,12 @@ class PsController extends Controller
         // TODO: GET THE ps THE RIGHT WAY
         $response = Http::get($this->psBaseUrl.urlencode($psId));
         $body = json_decode($response->body(), true);
+        $message = $body ? $body['message'] : 'response error '.$response->status();
 
         if ($response->failed()) {
             return view('welcome', [
                 'title' => 'Erreur',
-                'message' => $body["message"]
+                'message' => $message
             ]);
         }
 
@@ -83,11 +84,12 @@ class PsController extends Controller
         // TODO: this updates in our database, adapt for WS
         $response = Http::put($this->psBaseUrl.urlencode($psId), array_filter(request()->all()));
         $body = json_decode($response->body(), true);
+        $message = $body ? $body['message'] : 'response error '.$response->status();
 
         if ($response->failed()) {
             return view('welcome', [
                 'title' => 'Erreur',
-                'message' => $body["message"]
+                'message' => $message
             ]);
         }
 

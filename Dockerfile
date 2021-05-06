@@ -76,5 +76,6 @@ RUN composer install --optimize-autoloader --no-dev && \
     touch /var/www/html/.env && echo "APP_KEY=" > .env && php artisan key:generate && \
     php artisan route:cache && php artisan view:cache && php artisan config:cache && \
     composer dump-autoload && \
-    npm run production && \
-    sed -i '/^exec.*/i php artisan config:cache' /usr/local/bin/apache2-foreground
+    npm run production
+
+RUN sed -i '/^exec.*/i php artisan config:cache' /usr/local/bin/apache2-foreground
