@@ -113,10 +113,11 @@ class PsController extends Controller
     private function putResponse($psId, $filteredArray): Response
     {
         if (config('app.env') == 'test-BAS') {
-            $response = Http::put($this->inRassBaseUrl.urlencode($psId), [
+            $response = Http::put($this->inRassBaseUrl.'?nationalId='.urlencode($psId), [
                 'mobile' => $filteredArray['phone'],
                 'mail' => $filteredArray['email']
             ]);
+            // persist in local DB
             if ($response->successful()) {
                 Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
             }
@@ -149,7 +150,12 @@ class PsController extends Controller
     private function getMessage($body, $response): string
     {
         if (config('app.env') == 'test-BAS') {
-            return $body ? $body[0]['errorMessage'] : 'response error '.$response->status();
+            if ($body ? $body['message'] : false) {
+                return $body['message'];
+            } elseif ($body ? $body[0] : false) {
+                return $body[0]['errorMessage'];
+            }
+            return 'response error '.$response->status();
         } else {
             return $body ? $body['message'] : 'response error '.$response->status();
         }
