@@ -113,10 +113,14 @@ class PsController extends Controller
     private function putResponse($psId, $filteredArray): Response
     {
         if (config('app.env') == 'test-BAS') {
-            return Http::put($this->inRassBaseUrl.urlencode($psId), [
+            $response = Http::put($this->inRassBaseUrl.urlencode($psId), [
                 'mobile' => $filteredArray['phone'],
                 'mail' => $filteredArray['email']
             ]);
+            if ($response->successful()) {
+                Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
+            }
+            return $response;
         } else {
             return Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
         }
