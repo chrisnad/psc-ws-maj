@@ -36,19 +36,19 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        /*$this->renderable(function(Exception $e, $request) {
-            return $this->handleException($request, $e);
-        });*/
-
-        $this->reportable(function (Throwable $e) {
+        $this->renderable(function (Throwable $e) {
             return redirect(route('welcome', [
                 'title' => 'Erreur',
                 'message' => $e->getMessage()
             ]));
         });
+
+        /*$this->renderable(function(Exception $e, $request) {
+            return $this->handleException($request, $e);
+        });*/
     }
 
-    public function handleException($request, Exception $exception)
+    private function handleException($request, Exception $exception)
     {
         /*if ($exception instanceof MethodNotAllowedHttpException) {
             return $this->errorResponse('The specified method for the request is invalid', 405);
