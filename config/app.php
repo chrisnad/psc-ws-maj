@@ -60,6 +60,8 @@ return [
 
     'api_url' => env('API_URL', 'http://localhost:9000/api/'),
 
+    'in_rass_url' => env('IN_RASS_URL', 'http://localhost:9000/api/ps/'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
