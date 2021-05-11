@@ -49,8 +49,8 @@ RUN a2enmod rewrite headers
 
 # 4. start with base php config, then add extensions
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" && \
+    sed -i 's/;curl.cainfo =/curl.cainfo=\/var\/www\/html\/trusted-ca-bundle.pem/g' $PHP_INI_DIR/php.ini && \
     docker-php-ext-install exif sockets
-
 
 # 5. composer
 ENV COMPOSER_HOME /composer

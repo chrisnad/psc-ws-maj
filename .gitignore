@@ -14,7 +14,7 @@ yarn-error.log
 /psc-ws-maj.nomad
 /public/css
 /public/js
-*.pem
+public_key.pem
 
 ### IntelliJ IDEA ###
 .idea

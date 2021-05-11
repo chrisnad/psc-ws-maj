@@ -41,7 +41,10 @@ class Handler extends ExceptionHandler
         });*/
 
         $this->reportable(function (Throwable $e) {
-            //
+            return redirect(route('welcome', [
+                'title' => 'Erreur',
+                'message' => $e->getMessage()
+            ]));
         });
     }
 
