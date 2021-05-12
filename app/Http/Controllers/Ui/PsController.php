@@ -61,11 +61,11 @@ class PsController extends Controller
         if ($response->failed()) {
             return view('welcome', [
                 'title' => 'Erreur',
-                'message' => $this->getMessage($body, $response)
+                'message' => $this->getErrorMessage($body, $response)
             ]);
         }
 
-        return view('ps.show', ['ps' => $this->getProtectedPs($body)]);
+        return view('ps.show', ['ps' => $this->getFilteredPs($body)]);
     }
 
     /**
@@ -93,7 +93,7 @@ class PsController extends Controller
         if ($response->failed()) {
             return view('welcome', [
                 'title' => 'Erreur',
-                'message' => $this->getMessage($body, $response)
+                'message' => $this->getErrorMessage($body, $response)
             ]);
         }
 
@@ -101,7 +101,7 @@ class PsController extends Controller
 
         return view('welcome', [
             'title' => 'Succès',
-            'message' => 'Les modifications on bien été prises en compte'
+            'message' => 'Les modifications ont bien été prises en compte'
         ]);
     }
 
@@ -147,17 +147,12 @@ class PsController extends Controller
      * @param $response
      * @return string
      */
-    private function getMessage($body, $response): string
+    private function getErrorMessage($body, $response): string
     {
         if (config('app.env') == 'test-BAS') {
-            if ($body ? $body['message'] : false) {
-                return $body['message'];
-            } elseif ($body ? $body[0] : false) {
-                return $body[0]['errorMessage'];
-            }
-            return 'response error '.$response->status();
+            return isset($body[0]['errorMessage']) ? $body[0]['errorMessage'] : 'response error '.$response->status();
         } else {
-            return $body ? $body['message'] : 'response error '.$response->status();
+            return isset($body['message']) ? $body['message'] : 'response error '.$response->status();
         }
     }
 
@@ -165,7 +160,7 @@ class PsController extends Controller
      * @param $body
      * @return array
      */
-    private function getProtectedPs($body): array
+    private function getFilteredPs($body): array
     {
         if (config('app.env') == 'test-BAS') {
             return [

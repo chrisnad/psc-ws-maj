@@ -1,13 +1,13 @@
 {{ Form::open(['route' => ['ps.update', $ps['nationalId']], 'method' => 'PUT']) }}
 
 <div class="form-group"><!-- Phone is required -->
-    {{ Form::label('phone', 'Telephone :', array('class' => 'control-label')) }}
+    {{ Form::label('phone', 'Numéro de téléphone :', array('class' => 'control-label')) }}
     {{ Form::text('phone', null, array('class'=>'form-control', 'placeholder' => $ps['phone'])) }}
     <p class="text-danger">{{ $errors->first('phone') }}</p>
 </div>
 
 <div class="form-group"><!-- Email is required -->
-    {{ Form::label('email', 'E-Mail Address :', array('class' => 'control-label')) }}
+    {{ Form::label('email', 'Adresse e-mail :', array('class' => 'control-label')) }}
     {{ Form::text('email', null, array('class'=>'form-control', 'placeholder' => $ps['email'])) }}
     <p class="text-danger">{{ $errors->first('email') }}</p>
 </div>
@@ -15,7 +15,7 @@
 <div class="form-group p-1"><!-- Accept conditions is required -->
     {{ Form::checkbox('conditions') }}
     <a class="align-middle small" href="#conditions-modal">
-        {{ Form::label('conditions', "J'accept les conditions d'utilisation du service", array('class' => 'control-label')) }}</a>
+        {{ Form::label('conditions', "J'accepte les conditions d'utilisation du service", array('class' => 'control-label')) }}</a>
     <p class="text-danger">{{ $errors->first('conditions') }}</p>
 </div>
 

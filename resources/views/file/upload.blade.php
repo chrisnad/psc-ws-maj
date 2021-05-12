@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @component('sub.card', ['title' => 'Dépot du fichier'])
+    @component('sub.card', ['title' => 'Dépôt du fichier'])
 
         <input id="colNum" type="hidden" value="{{ $colNum }}">
 
@@ -15,7 +15,7 @@
             <p class="text-danger">{{ $errors->first('file') }}</p>
             <div class="col text-center input-group pt-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Separateur</span>
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Séparateur</span>
                 </div>
                 <input id="separator" name="separator" required type="text" onchange="setSeparator()" value="|"
                        class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
