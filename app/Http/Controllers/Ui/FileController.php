@@ -116,7 +116,7 @@ class FileController extends Controller
             return view('file.upload', [
                 'headers' => $this->HEADER,
                 'colNum' => $this->VALID_COLUMN_NUMBER-1,
-                'title' => 'Success',
+                'title' => 'Succès',
                 'message' => 'Le fichier a été envoyé pour le traitement'
             ]);
         } else {
