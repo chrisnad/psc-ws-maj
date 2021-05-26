@@ -55,7 +55,7 @@ class PsController extends Controller
         $psId = $request->input('id');
 
         // GET REQUEST
-        $response = $this->getResponse($psId);
+        $response = $this->getPsById($psId);
         $body = json_decode($response->body(), true);
 
         if ($response->failed()) {
@@ -112,26 +112,23 @@ class PsController extends Controller
      */
     private function putResponse($psId, $filteredArray): Response
     {
-        if (config('app.env') == 'test-BAS') {
+        // Put in local DB via our API
+        $response = Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
+        // Push to IN
+        if ($response->successful()) {
             $response = Http::put($this->inRassBaseUrl.'?nationalId='.urlencode($psId), [
                 'mobile' => $filteredArray['phone'],
                 'mail' => $filteredArray['email']
             ]);
-            // persist in local DB
-            if ($response->successful()) {
-                Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
-            }
-            return $response;
-        } else {
-            return Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
         }
+        return $response;
     }
 
     /**
      * @param $psId
      * @return Response
      */
-    private function getResponse($psId): Response
+    private function getPsById($psId): Response
     {
         if (config('app.env') == 'test-BAS') {
             return Http::get($this->inRassBaseUrl, [
