@@ -115,10 +115,11 @@ class PsController extends Controller
         // Put in local DB via our API
         $response = Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
         // Push to IN
+        // TODO: push to job queue and do not return a response
         if ($response->successful()) {
-            $response = Http::put($this->inRassBaseUrl.'?nationalId='.urlencode($psId), [
-                'mobile' => $filteredArray['phone'],
-                'mail' => $filteredArray['email']
+            $response = Http::put($this->inRassBaseUrl.'?nationalId='.$psId, [
+                'phone' => $filteredArray['phone'],
+                'email' => $filteredArray['email']
             ]);
         }
         return $response;
