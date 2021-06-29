@@ -47,7 +47,7 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 # 3. mod_rewrite for URL rewrite and mod_headers for .htaccess extra headers like Access-Control-Allow-Origin-
 RUN a2enmod rewrite headers
 
-# 4. start with base php config, then add extensions
+# 4. start with base php config, then add extensions. CA Bundle for https requests
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini" && \
     sed -i 's/;curl.cainfo =/curl.cainfo=\/var\/www\/html\/trusted-ca-bundle.pem/g' $PHP_INI_DIR/php.ini && \
     docker-php-ext-install exif sockets
