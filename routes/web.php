@@ -36,7 +36,7 @@ Route::get('/home', [HomeController::class, 'index'])
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
-$nationalIdRegex = '^[a-zA-Z0-9]+(\/|[a-zA-Z0-9]|\-)[a-zA-Z0-9]+$';
+$nationalIdRegex = '^(?:([a-zA-Z0-9]+)(\/|-)?)+$';
 
 Route::get('/ps', [PsController::class, 'getById'])
     ->name('ps.getById');
