@@ -87,17 +87,18 @@ class PsController extends Controller
             'conditions' => 'accepted'
         ]);
 
-        $response = $this->putResponse($psId, [
-            "phone" => request()->all()["phone"],
-            "email" => request()->all()["email"]
-        ]);
+        $requestBody = array();
+        isset(request()->all()['phone']) ? $requestBody['phone'] = request()->all()['phone'] : null;
+        isset(request()->all()['email']) ? $requestBody['email'] = request()->all()['email'] : null;
 
-        $body = json_decode($response->body(), true);
+        $response = $this->putResponse($psId, $requestBody);
+
+        $responseBody = json_decode($response->body(), true);
 
         if ($response->failed()) {
             return view('welcome', [
                 'title' => 'Erreur',
-                'message' => $this->getErrorMessage($body, $response)
+                'message' => $this->getErrorMessage($responseBody, $response)
             ]);
         }
 
@@ -111,17 +112,17 @@ class PsController extends Controller
 
     /**
      * @param $psId
-     * @param $filteredArray
+     * @param $requestBody
      * @return Response
      */
-    private function putResponse($psId, $filteredArray): Response
+    private function putResponse($psId, $requestBody): Response
     {
         // Put in local DB via our API
-        $response = Http::put($this->psBaseUrl.urlencode($psId), $filteredArray);
+        $response = Http::put($this->psBaseUrl.urlencode($psId), $requestBody);
         // Push to IN
         // TODO: push to job queue and do not return a response
         if ($response->successful()) {
-            Http::put($this->inRassBaseUrl.'?nationalId='.$psId, $filteredArray);
+            Http::put($this->inRassBaseUrl.'?nationalId='.$psId, $requestBody);
         }
         return $response;
     }
