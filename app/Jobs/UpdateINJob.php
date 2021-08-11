@@ -2,20 +2,17 @@
 
 namespace App\Jobs;
 
+use DateTime;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
-class UpdateRassJob extends Job
+class UpdateINJob extends Job
 {
 
     /**
      * @var string
      */
-    private $inRassBaseUrl;
-
-    /**
-     * @var string
-     */
-    private $psId;
+    private $url;
 
     /**
      * @var array
@@ -27,11 +24,10 @@ class UpdateRassJob extends Job
      *
      * @return void
      */
-    public function __construct(string $id, array $body)
+    public function __construct(string $url, array $body)
     {
-        $this->psId = $id;
+        $this->url = $url;
         $this->requestBody = $body;
-        $this->inRassBaseUrl = config("app.in_rass_url");
     }
 
     /**
@@ -41,8 +37,16 @@ class UpdateRassJob extends Job
      */
      public function handle()
      {
-         $psId = $this->psId;
+         $url = $this->url;
          $requestBody = $this-> requestBody;
-         Http::put($this->inRassBaseUrl.'?nationalId='.$psId, $requestBody);
+         Http::put($url, $requestBody);
+     }
+
+    /**
+     * @return DateTime
+     */
+     public function retryUntil(): DateTime
+     {
+         return now()->addHours(24);
      }
 }
