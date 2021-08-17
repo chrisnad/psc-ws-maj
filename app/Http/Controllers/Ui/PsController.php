@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Ui;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\UpdateINJob;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -115,15 +116,17 @@ class PsController extends Controller
      * @param $requestBody
      * @return Response
      */
-    private function putResponse($psId, $requestBody): Response
+    public function putResponse($psId, $requestBody): Response
     {
         // Put in local DB via our API
         $response = Http::put($this->psBaseUrl.urlencode($psId), $requestBody);
         // Push to IN
-        // TODO: push to job queue and do not return a response
-        if ($response->successful()) {
-            Http::put($this->inRassBaseUrl.'?nationalId='.$psId, $requestBody);
+        $url = $this->inRassBaseUrl.'?nationalId='.$psId;
+
+        if ($response-> successful()) {
+            $this->dispatch(new UpdateINJob($url, $requestBody));
         }
+
         return $response;
     }
 
