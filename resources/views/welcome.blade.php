@@ -2,8 +2,6 @@
 
 @section('content')
 
-    TEST TEST TEST TEST TEST TEST TEST
-
     @component('sub.card', ['title' => 'Recherche par identifiant'])
 
         @if (session('authenticated'))
