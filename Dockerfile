@@ -71,7 +71,8 @@ RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser && \
 WORKDIR /var/www/html
 
 # Install dependencies, run npm, patch apache start script to reload php config
-RUN composer install --optimize-autoloader --no-dev && \
+RUN composer update && \
+    composer install --optimize-autoloader --no-dev && \
     npm install && \
     touch /var/www/html/.env && echo "APP_KEY=" > .env && php artisan key:generate && \
     php artisan route:cache && php artisan view:cache && php artisan config:cache && \
