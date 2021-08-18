@@ -10,6 +10,11 @@ runner {
     }
 }
 
+variable "public_hostname" {
+    type    = string
+    default = "psc-ws-maj.psc.api.esante.gouv.fr"
+}
+
 # An application to deploy.
 app "prosanteconnect/psc-ws-maj" {
     # Build specifies how an application should be deployed. In this case,
@@ -29,7 +34,9 @@ app "prosanteconnect/psc-ws-maj" {
     # Deploy to Nomad
     deploy {
       use "nomad-jobspec" {
-        jobspec = templatefile("${path.app}/psc-ws-maj.nomad.tpl")
+        jobspec = templatefile("${path.app}/psc-ws-maj.nomad.tpl", {
+            public_hostname = var.public_hostname
+        })
       }
     }
 }

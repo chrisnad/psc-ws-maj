@@ -87,7 +87,7 @@ EOH
             }
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-/"]
+                tags = ["urlprefix-${public_hostname}/"]
                 canary_tags = ["canary instance to promote"]
                 port = "http"
                 check {
